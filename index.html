@@ -6,12 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Dissent - Photocard Maker</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  
 
     <style>
       
+    /* Shurjo Regular Font Load */
+        @font-face {
+            font-family: 'Shurjo';
+            src: url('Shurjo-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* Shurjo Bold Font Load */
+        @font-face {
+            font-family: 'Shurjo';
+            src: url('Shurjo-bold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
         body {
-            font-family: 'Noto Serif Bengali', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Shurjo', Tahoma, Geneva, Verdana, sans-serif;
             background: #f4f4f9;
             margin: 0;
             padding: 20px;
@@ -75,7 +91,7 @@
 
         button {
             margin-top: 25px;
-            font-family: 'Noto Serif Bengali', sans-serif;
+            font-family: 'Shurjo', sans-serif;
             padding: 12px;
             width: 100%;
             background: #2A2A2A;
@@ -203,11 +219,11 @@
             padding-top: 20px;
             padding-bottom: 5px;
             color: white;
-            font-family: 'Noto Serif Bengali', serif;
+            font-family: 'Shurjo', serif;
         }
 
         .category {
-            font-size: 35px;
+            font-size: 30px;
             font-weight: 500;
             width: 30%;
             white-space: nowrap;
@@ -222,12 +238,12 @@
         }
 
         .logo-area img {
-            height: 50px;
+            height: 60px;
             max-width: 100%;
         }
 
         .date {
-            font-size: 35px;
+            font-size: 30px;
             font-weight: 500;
             width: 30%;
             text-align: right;
@@ -247,7 +263,7 @@
         }
 
         .main-text {
-            font-family: 'Noto Serif Bengali', serif;
+            font-family: 'Shurjo', serif;
             font-size: 63px;
             color: white;
             line-height: 1.1;
