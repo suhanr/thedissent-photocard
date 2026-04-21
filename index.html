@@ -139,15 +139,13 @@
         .preview-wrapper {
             flex: 2;
             min-width: 350px;
-            display: flex;
-            padding-top: 20px;
-            justify-content: center;
-            align-items: flex-start;
-            overflow: hidden;
+            display: block;
+            overflow: hidden; /* ফিক্স: স্ক্রলবার রিমুভ করা হয়েছে */
+            position: relative; 
         }
 
         /* ==========================================
-           Photocard Core Design (UNTOUCHED)
+           Photocard Core Design
            ========================================== */
         #photocard {
             width: 1080px;
@@ -161,8 +159,7 @@
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
-            transform: scale(0.5);
-            transform-origin: top center;
+            transform-origin: top left;
             overflow: hidden;
             border-radius: 10px;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
@@ -186,6 +183,7 @@
             min-width: 50px;
             min-height: 50px;
             box-sizing: border-box;
+            touch-action: none;
         }
 
         .draggable-image:hover {
@@ -194,8 +192,8 @@
         }
 
         .resize-handle {
-            width: 16px;
-            height: 16px;
+            width: 25px; 
+            height: 25px;
             background: #007bff;
             border: 2px solid white;
             border-radius: 50%;
@@ -208,26 +206,26 @@
             display: block;
         }
 
-        .nw { top: -8px; left: -8px; cursor: nwse-resize; }
-        .ne { top: -8px; right: -8px; cursor: nesw-resize; }
-        .sw { bottom: -8px; left: -8px; cursor: nesw-resize; }
-        .se { bottom: -8px; right: -8px; cursor: nwse-resize; }
+        .nw { top: -12px; left: -12px; cursor: nwse-resize; }
+        .ne { top: -12px; right: -12px; cursor: nesw-resize; }
+        .sw { bottom: -12px; left: -12px; cursor: nesw-resize; }
+        .se { bottom: -12px; right: -12px; cursor: nwse-resize; }
 
         .delete-btn {
             position: absolute;
-            top: 5px;
-            right: 5px;
+            top: 10px;
+            right: 10px;
             background: #ff4757;
             color: white;
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
             text-align: center;
-            line-height: 23px;
+            line-height: 28px;
             border-radius: 50%;
             cursor: pointer;
             font-family: sans-serif;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 16px;
             display: none;
             z-index: 5;
         }
@@ -299,7 +297,7 @@
 
         .main-text {
             font-family: 'Shurjo', serif;
-            font-size: 65px;
+            font-size: 63px;
             color: white;
             line-height: 1.1;
             font-weight: 600;
@@ -327,6 +325,79 @@
             align-items: center;
             gap: 8px;
         }
+
+        /* ==========================================
+           Mobile Responsive Styles
+           ========================================== */
+        @media (max-width: 800px) {
+            body { 
+                padding: 15px; 
+                flex-direction: column; 
+                gap: 20px; 
+            }
+            .controls {
+                order: 2; /* ফিক্স: মোবাইলে কন্ট্রোল নিচে যাবে */
+                max-width: 100%; 
+                min-width: 100%; 
+                box-sizing: border-box; 
+                padding: 20px 15px;
+                flex: none;
+            }
+            .preview-wrapper {
+                order: 1; /* ফিক্স: মোবাইলে প্রিভিউ উপরে যাবে */
+                width: 100%;
+                min-width: 100%;
+                flex: none;
+            }
+
+            .draggable-image .resize-handle, 
+            .draggable-image .delete-btn { 
+                display: block; 
+            }
+
+            .controls h2 {
+                font-size: 24px;
+            }
+
+            label {
+                font-size: 15px;
+            }
+
+            input,
+            textarea {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            button {
+                font-size: 16px;
+                padding: 12px;
+            }
+
+            .main-text {
+                font-size: 38px;
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            .category,
+            .date {
+                font-size: 18px;
+            }
+
+            .middle-bar {
+                padding: 10px 20px 5px;
+            }
+
+            .footer {
+                font-size: 16px;
+                padding: 8px 20px;
+            }
+
+            .logo-area img {
+                height: 40px;
+            }
+        }
     </style>
 </head>
 
@@ -337,7 +408,7 @@
 
         <label>সোর্স ছবি আপলোড করুন</label>
         <input type="file" id="imgUpload" accept="image/*" multiple>
-        <span class="help-text">💡 <b>একাধিক ছবি</b> সিলেক্ট করতে পারবেন। ছবির উপর ক্লিক করে টেনে পজিশন ঠিক করুন এবং যেকোনো কোণায় ধরে ছোট-বড় করুন।</span>
+        <span class="help-text">💡 <b>একাধিক ছবি</b> সিলেক্ট করতে পারবেন। ছবির উপর ক্লিক বা টাচ করে টেনে পজিশন ঠিক করুন এবং যেকোনো কোণায় ধরে ছোট-বড় করুন।</span>
 
         <label>ক্যাটেগরি</label>
         <input type="text" id="catInput" placeholder="যেমন: ডিজিটাল ইনভেস্টিগেশন">
@@ -346,13 +417,13 @@
         <input type="text" id="dateInput" placeholder="এভাবে লিখুনঃ তারিখ: ২০/০৮/২০২৩">
 
         <label>টাইটেল টেক্সট</label>
-        <textarea id="textInput" placeholder="আজহারী ও আহমাদুল্লাহর ভিসা বাতিলের পেছনে *অস্ট্রেলিয়ার আওয়ামী সংশ্লিষ্ট নেটওয়ার্ক*"></textarea>
+        <textarea id="textInput" placeholder="যেমনঃ আজহারী ও আহমাদুল্লাহর ভিসা বাতিলের পেছনে *অস্ট্রেলিয়ার আওয়ামী সংশ্লিষ্ট নেটওয়ার্ক*"></textarea>
         <span class="help-text">💡 যে লেখা হলুদ করতে চান তার দুই পাশে * দিন। (যেমন: *হ্যালো*)</span>
 
         <button onclick="downloadPhotocard()">ডাউনলোড করুন</button>
     </div>
 
-    <div class="preview-wrapper">
+    <div class="preview-wrapper" id="previewWrapper">
         <div id="photocard">
 
             <div class="image-container" id="imageContainer">
@@ -386,6 +457,31 @@
         const dateDisplay = document.getElementById('dateDisplay');
         const imgUpload = document.getElementById('imgUpload');
         const imageContainer = document.getElementById('imageContainer');
+        const photocard = document.getElementById('photocard');
+        const previewWrapper = document.getElementById('previewWrapper');
+
+        let appScale = 0.5;
+
+        // Perfect Math for centering on Mobile & Desktop
+        function adjustScale() {
+            const wrapperWidth = previewWrapper.clientWidth;
+            
+            if (wrapperWidth < 1080) {
+                appScale = wrapperWidth / 1080;
+            } else {
+                appScale = Math.min(0.6, wrapperWidth / 1400);
+            }
+            
+            photocard.style.transform = `scale(${appScale})`;
+            previewWrapper.style.height = `${1080 * appScale}px`;
+            
+            // Auto Centering logic
+            const scaledWidth = 1080 * appScale;
+            photocard.style.marginLeft = `${(wrapperWidth - scaledWidth) / 2}px`;
+        }
+        
+        window.addEventListener('resize', adjustScale);
+        setTimeout(adjustScale, 100);
 
         function updateText() {
             let rawText = textInput.value;
@@ -441,20 +537,30 @@
             imageContainer.appendChild(wrapper);
         }
 
+        // --- Touch & Mouse Event Logic ---
         let isDragging = false;
         let isResizing = false;
         let currentElement = null;
         let currentHandle = null;
         let startX, startY, initialLeft, initialTop, startW, startH;
-        const scale = 0.5;
 
-        document.addEventListener('mousedown', (e) => {
+        function getEventPos(e) {
+            if (e.touches && e.touches.length > 0) {
+                return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            }
+            return { x: e.clientX, y: e.clientY };
+        }
+
+        function handleStart(e) {
             if (e.target.classList.contains('resize-handle')) {
                 isResizing = true;
                 currentHandle = e.target;
                 currentElement = e.target.closest('.draggable-image');
-                startX = e.clientX;
-                startY = e.clientY;
+                
+                const pos = getEventPos(e);
+                startX = pos.x;
+                startY = pos.y;
+                
                 initialLeft = currentElement.offsetLeft;
                 initialTop = currentElement.offsetTop;
                 startW = currentElement.offsetWidth;
@@ -467,8 +573,11 @@
             } else if (e.target.classList.contains('drag-handle')) {
                 isDragging = true;
                 currentElement = e.target;
-                startX = e.clientX;
-                startY = e.clientY;
+                
+                const pos = getEventPos(e);
+                startX = pos.x;
+                startY = pos.y;
+                
                 initialLeft = currentElement.offsetLeft;
                 initialTop = currentElement.offsetTop;
 
@@ -476,12 +585,14 @@
                 currentElement.style.zIndex = '10';
                 e.preventDefault();
             }
-        });
+        }
 
-        document.addEventListener('mousemove', (e) => {
+        function handleMove(e) {
             if (isResizing && currentElement) {
-                const dx = (e.clientX - startX) / scale;
-                const dy = (e.clientY - startY) / scale;
+                e.preventDefault();
+                const pos = getEventPos(e);
+                const dx = (pos.x - startX) / appScale;
+                const dy = (pos.y - startY) / appScale;
 
                 let newW = startW, newH = startH, newL = initialLeft, newT = initialTop;
 
@@ -512,38 +623,49 @@
                     currentElement.style.top = newT + 'px';
                 }
             } else if (isDragging && currentElement) {
-                const dx = (e.clientX - startX) / scale;
-                const dy = (e.clientY - startY) / scale;
+                e.preventDefault();
+                const pos = getEventPos(e);
+                const dx = (pos.x - startX) / appScale;
+                const dy = (pos.y - startY) / appScale;
                 currentElement.style.left = (initialLeft + dx) + 'px';
                 currentElement.style.top = (initialTop + dy) + 'px';
             }
-        });
+        }
 
-        document.addEventListener('mouseup', () => {
+        function handleEnd() {
             isDragging = false;
             isResizing = false;
             currentElement = null;
             currentHandle = null;
-        });
+        }
 
-        // ফিক্স: স্কয়ার সেভ করার জন্য width ও height ম্যানুয়ালি বলে দেওয়া হয়েছে
+        document.addEventListener('mousedown', handleStart, { passive: false });
+        document.addEventListener('mousemove', handleMove, { passive: false });
+        document.addEventListener('mouseup', handleEnd);
+        
+        document.addEventListener('touchstart', handleStart, { passive: false });
+        document.addEventListener('touchmove', handleMove, { passive: false });
+        document.addEventListener('touchend', handleEnd);
+
         function downloadPhotocard() {
             document.fonts.ready.then(() => {
-                const photocard = document.getElementById('photocard');
                 const originalTransform = photocard.style.transform;
+                const originalMargin = photocard.style.marginLeft;
 
                 photocard.style.transform = 'none';
+                photocard.style.marginLeft = '0px';
                 photocard.classList.add('exporting');
 
                 html2canvas(photocard, {
                     scale: 2,
-                    width: 1080,   /* Strict Width */
-                    height: 1080,  /* Strict Height */
+                    width: 1080,   
+                    height: 1080,  
                     useCORS: true,
                     allowTaint: true,
                     backgroundColor: '#2b2b2d'
                 }).then(canvas => {
                     photocard.style.transform = originalTransform;
+                    photocard.style.marginLeft = originalMargin;
                     photocard.classList.remove('exporting');
 
                     const link = document.createElement('a');
