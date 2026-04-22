@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -201,22 +201,30 @@
            ========================================== */
         .popup-panel {
             position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%) scale(0.95);
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
             z-index: 1000;
-            width: 90%; max-width: 400px;
-            max-height: 80vh; overflow-y: auto;
+            width: 90%; 
+            max-width: 400px;
+            max-height: 85vh; 
+            overflow-y: auto;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: var(--blur);
             -webkit-backdrop-filter: var(--blur);
-            padding: 25px; border-radius: 20px;
+            padding: 25px; 
+            border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.5) inset;
             display: none;
             opacity: 0;
             transition: opacity 0.2s ease-in-out;
+            margin: 0 !important;
         }
 
-        .popup-panel.show { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        .popup-panel.show { 
+            display: block; 
+            opacity: 1; 
+        }
 
         .drag-handle-popup { cursor: grab; user-select: none; }
         .drag-handle-popup:active { cursor: grabbing; }
@@ -228,7 +236,7 @@
            ========================================== */
         .preview-wrapper {
             flex: 1; display: flex; justify-content: center; align-items: flex-start;
-            overflow: hidden; position: relative; padding-top: 10px; min-width: 0; /* Changed for mobile */
+            overflow: hidden; position: relative; padding-top: 10px; min-width: 350px;
         }
 
         #photocard {
@@ -239,7 +247,7 @@
         }
 
         /* ==========================================
-           9. Draggable Elements (Canva Style)
+           9. Draggable Elements
            ========================================== */
         .image-container { width: 1080px; height: 600px; background: white; position: relative; overflow: hidden; }
 
@@ -265,28 +273,28 @@
         }
 
         .resize-handle {
-            width: 14px; height: 14px; background: white; border: 2px solid var(--accent); border-radius: 50%;
+            width: 20px; height: 20px; background: white; border: 2px solid var(--accent); border-radius: 50%;
             position: absolute; display: none; z-index: 40; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         .active-element .resize-handle { display: block !important; }
 
-        .nw { top: -8px; left: -8px; cursor: nwse-resize; }
-        .ne { top: -8px; right: -8px; cursor: nesw-resize; }
-        .sw { bottom: -8px; left: -8px; cursor: nesw-resize; }
-        .se { bottom: -8px; right: -8px; cursor: nwse-resize; }
+        .nw { top: -10px; left: -10px; cursor: nwse-resize; }
+        .ne { top: -10px; right: -10px; cursor: nesw-resize; }
+        .sw { bottom: -10px; left: -10px; cursor: nesw-resize; }
+        .se { bottom: -10px; right: -10px; cursor: nwse-resize; }
 
         .action-btn {
             position: absolute; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(4px);
-            width: 28px; height: 28px; text-align: center; line-height: 26px; border-radius: 50%;
-            cursor: pointer; font-family: sans-serif; font-weight: bold; font-size: 14px;
+            width: 36px; height: 36px; text-align: center; line-height: 34px; border-radius: 50%;
+            cursor: pointer; font-family: sans-serif; font-weight: bold; font-size: 16px;
             display: none; z-index: 40; box-shadow: 0 2px 6px rgba(0,0,0,0.2); border: 1px solid rgba(0,0,0,0.05); transition: var(--transition);
         }
         .active-element .action-btn { display: block !important; }
 
-        .delete-btn { top: -16px; right: -16px; color: var(--danger); }
+        .delete-btn { top: -18px; right: -18px; color: var(--danger); }
         .delete-btn:hover { background: var(--danger); color: white; transform: scale(1.1); }
 
-        .edit-btn { top: -16px; right: 20px; color: var(--accent); font-size: 12px; }
+        .edit-btn { top: -18px; right: 25px; color: var(--accent); font-size: 14px; }
         .edit-btn:hover { background: var(--accent); color: white; transform: scale(1.1); }
 
         #photocard.exporting .draggable-image, #photocard.exporting .draggable-shape, #photocard.exporting .draggable-text { border: none !important; box-shadow: none !important; }
@@ -301,9 +309,14 @@
         .logo-area img { height: 60px; max-width: 100%; }
         .date { font-size: 30px; font-weight: 500; width: 30%; text-align: right; white-space: nowrap; }
 
-        .text-block { background-color: #38383a; margin: 10px 0px; padding: 30px; flex-grow: 1; display: flex; flex-direction: column; gap: 15px; align-items: center; justify-content: center; text-align: center; box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); }
-        .main-text { font-family: 'Shurjo', serif; font-size: 63px; color: white; line-height: 1.1; font-weight: 600; padding-left: 75px; padding-right: 75px; }
-        .sub-text { font-family: 'Shurjo', serif; font-size: 38px; color: #e0e0e0; line-height: 1.3; font-weight: 500; padding-left: 50px; padding-right: 50px; display: none; margin-bottom: 10px; }
+        .text-block { 
+            background-color: #38383a; margin: 10px 0px; padding: 30px; flex-grow: 1; 
+            display: flex; flex-direction: column; gap: 15px; align-items: center; justify-content: center; 
+            text-align: center; box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); 
+            width: 100%; box-sizing: border-box;
+        }
+        .main-text { font-family: 'Shurjo', serif; font-size: 63px; color: white; line-height: 1.1; font-weight: 600; padding-left: 75px; padding-right: 75px; width: 100%; box-sizing: border-box; }
+        .sub-text { font-family: 'Shurjo', serif; font-size: 38px; color: #e0e0e0; line-height: 1.3; font-weight: 500; padding-left: 50px; padding-right: 50px; display: none; margin-bottom: 10px; width: 100%; box-sizing: border-box; }
         .text-yellow { color: #f1f226; }
 
         .footer { height: 40px; display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 40px 10px 40px; color: white; font-size: 22px; font-family: 'Segoe UI', sans-serif; }
@@ -313,12 +326,13 @@
            11. Mobile Responsiveness
            ========================================== */
         @media (max-width: 1050px) {
-            body { padding: 15px; flex-direction: column; gap: 15px; }
+            body { padding: 15px; flex-direction: column; gap: 20px; }
             .side-panel { width: 100%; max-width: 100%; flex: none; order: 2; gap: 15px;}
             .right-panel { order: 3; }
             .preview-wrapper { order: 1; width: 100%; min-width: 0; padding-top: 5px; flex: none; justify-content: center; }
+            #photocard { transform-origin: top left; }
             .panel-card { padding: 18px; margin-bottom: 0; }
-            .popup-panel { padding: 15px; }
+            .popup-panel { width: 90%; }
         }
     </style>
 </head>
@@ -326,7 +340,7 @@
 <body>
 
     <div class="side-panel left-panel">
-        <h1 class="header-title">The Dissent Photocard Studio</h1>
+        <h1 class="header-title">Photocard Studio</h1>
         <div class="panel-card">
             <h3 class="card-header">📝 বেসিক তথ্য</h3>
             <label>ক্যাটেগরি</label>
@@ -336,13 +350,13 @@
         </div>
         <div class="panel-card">
             <h3 class="card-header">✍️ হেডিং ও টেক্সট</h3>
-            <label>টাইটেল টেক্সট <span style="font-weight:normal; color:#888; font-size:12px;">(হলুদ করতে * দিন)</span></label>
-            <textarea id="textInput" placeholder="আজহারী ও আহমাদুল্লাহর..."></textarea>
+            <label>টাইটেল টেক্সট <span style="font-weight:normal; color:#888; font-size:12px;">(হলুদ করতে লেখার দুইপাশে * দিন। যেমনঃ *হ্যালো*)</span></label>
+            <textarea id="textInput" placeholder="সন্দেহজনক ওয়েবসাইটকে ‘মার্কিন গণমাধ্যম’ সাজিয়ে *ভুয়া তথ্য ছড়াচ্ছে আ.লীগ*"></textarea>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top:15px;">
-                <label style="margin:0;">সাবহেডিং</label>
+                <label style="margin:0;">সাবহেডিং (মেইন টেক্সটের উপরে)</label>
                 <input type="color" id="subTextColor" value="#e0e0e0" title="সাবহেডিং কালার">
             </div>
-            <textarea id="subTextInput" placeholder="বিস্তারিত জানতে ক্যাপশন পড়ুন..." style="height: 60px; margin-top: 8px;"></textarea>
+            <textarea id="subTextInput" placeholder="সন্দেহজনক ওয়েবসাইটকে *মার্কিন গণমাধ্যম*" style="height: 60px; margin-top: 8px;"></textarea>
         </div>
     </div>
 
@@ -367,13 +381,13 @@
 
     <div class="side-panel right-panel">
         <div class="panel-card">
-            <h3 class="card-header">🧩 উপাদান যুক্ত করুন</h3>
+            <h3 class="card-header">🧩 এলিমেন্টস যুক্ত করুন</h3>
             <label style="margin-top:0;">ছবি আপলোড করুন</label>
             <input type="file" id="imgUpload" accept="image/*" multiple>
             <label style="margin-top: 20px;">শেপ ও স্টিকার</label>
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                <button type="button" class="format-btn" onclick="addShape('square')">⬛ বর্গ</button>
-                <button type="button" class="format-btn" onclick="addShape('circle')">⚫ বৃত্ত</button>
+                <button type="button" class="format-btn" onclick="addShape('square')">⬛ স্কয়ার </button>
+                <button type="button" class="format-btn" onclick="addShape('circle')">⚫ সার্কেল</button>
                 <button type="button" class="format-btn" onclick="addShape('line')">➖ লাইন</button>
                 <select id="stickerSelect" class="format-btn" onchange="addSticker(this.value); this.value='';" style="width: auto; padding: 8px;">
                     <option value="">স্টিকার...</option>
@@ -457,7 +471,7 @@
         </div>
 
         <div class="prop-row">
-            <label style="margin:0;">স্বচ্ছতা</label>
+            <label style="margin:0;">ট্রান্সপারেন্সি</label>
             <div style="width: 65%; display:flex; align-items:center; gap:10px;">
                 <input type="range" id="propOpacity" min="0" max="100" value="100">
                 <span id="propOpacityVal" style="font-size:12px; width:35px; text-align:right;">100%</span>
@@ -477,6 +491,14 @@
             <div style="width: 65%; display:flex; align-items:center; gap:10px;">
                 <input type="range" id="propRadius" min="0" max="200" value="0">
                 <span id="propRadiusVal" style="font-size:12px; width:35px; text-align:right;">0px</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px; padding-top:15px; border-top: 1px solid rgba(0,0,0,0.05);">
+            <label style="margin-top:0;">পজিশন (Layering)</label>
+            <div style="display: flex; gap: 8px;">
+                <button type="button" class="format-btn" onclick="adjustLayer(1)">⬆️ সামনে আনুন</button>
+                <button type="button" class="format-btn" onclick="adjustLayer(-1)">⬇️ পেছনে পাঠান</button>
             </div>
         </div>
     </div>
@@ -499,10 +521,8 @@
         function adjustScale() {
             const wrapperWidth = previewWrapper.clientWidth;
             if (window.innerWidth <= 1050) { 
-                // For Mobile: Scale accurately based on wrapper width
                 appScale = wrapperWidth / 1080; 
             } else { 
-                // For Desktop
                 appScale = Math.min(0.65, wrapperWidth / 1100); 
             }
             
@@ -549,22 +569,28 @@
             const editBtn = document.createElement('div');
             editBtn.className = 'action-btn edit-btn';
             editBtn.innerHTML = '✏️';
-            editBtn.title = "এডিট করুন";
+            editBtn.title = "এডিট";
+            // Mobile touch and mouse click support
             editBtn.onclick = (e) => { e.stopPropagation(); setActiveElement(wrapper); openPopup(); }
+            editBtn.ontouchstart = (e) => { e.preventDefault(); e.stopPropagation(); setActiveElement(wrapper); openPopup(); }
             wrapper.appendChild(editBtn);
 
             const delBtn = document.createElement('div');
             delBtn.className = 'action-btn delete-btn';
             delBtn.innerHTML = '✕';
-            delBtn.title = "ডিলিট করুন";
+            delBtn.title = "ডিলিট";
+            // Mobile touch and mouse click support
             delBtn.onclick = (e) => { e.stopPropagation(); wrapper.remove(); clearSelection(); }
+            delBtn.ontouchstart = (e) => { e.preventDefault(); e.stopPropagation(); wrapper.remove(); clearSelection(); }
             wrapper.appendChild(delBtn);
+        }
 
-            wrapper.addEventListener('dblclick', function(e) {
-                e.stopPropagation();
-                setActiveElement(wrapper);
-                openPopup();
-            });
+        // Layer control function
+        function adjustLayer(change) {
+            if(!activeEl) return;
+            let currentZ = parseInt(activeEl.style.zIndex) || parseInt(activeEl.dataset.baseZ) || 20;
+            let newZ = currentZ + change;
+            activeEl.style.zIndex = newZ;
         }
 
         // Add Image
@@ -685,14 +711,15 @@
         function openPopup() {
             if(!activeEl) return;
             
-            // Remove transform centering logic dynamically so it stays where it is dragged
+            // Ensure centered only if it has never been dragged
             if (!advancedPanel.style.left || advancedPanel.style.left === '50%') {
-                advancedPanel.style.transform = 'translate(-50%, -50%) scale(1)';
+                advancedPanel.style.top = '50%';
+                advancedPanel.style.left = '50%';
+                advancedPanel.style.transform = 'translate(-50%, -50%)';
             }
             
             advancedPanel.classList.add('show');
 
-            // Read Current Element Properties
             let currentOpacity = activeEl.style.opacity || 1;
             document.getElementById('propOpacity').value = currentOpacity * 100;
             document.getElementById('propOpacityVal').innerText = (currentOpacity * 100) + '%';
@@ -749,7 +776,6 @@
                 }
             }
             
-            // Border Setup for Image
             if(isImage) {
                 let bw = parseInt(activeEl.style.borderWidth) || 0;
                 document.getElementById('propBorderWidth').value = bw;
@@ -857,7 +883,7 @@
         }
 
         function handleStart(e) {
-            // Dragging Popup Action
+            // Popup Drag
             if (e.target.closest('.drag-handle-popup')) {
                 if(e.target.tagName.toLowerCase() === 'span') return; 
                 isDraggingPopup = true;
@@ -874,7 +900,7 @@
                 return;
             }
 
-            // Do nothing if interacting inside popup panel
+            // Click inside popup panel -> do nothing
             if (e.target.closest('.popup-panel')) return;
 
             // Element Resizing
@@ -909,7 +935,6 @@
         }
 
         function handleMove(e) {
-            // Moving Popup
             if (isDraggingPopup) {
                 e.preventDefault();
                 const pos = getEventPos(e);
@@ -918,7 +943,6 @@
                 advancedPanel.style.left = (popupInitLeft + dx) + 'px';
                 advancedPanel.style.top = (popupInitTop + dy) + 'px';
             } 
-            // Resizing Element
             else if (isResizing && currentElement) {
                 e.preventDefault();
                 const pos = getEventPos(e);
@@ -953,7 +977,6 @@
                     currentElement.style.top = newT + 'px';
                 }
             } 
-            // Dragging Element
             else if (isDragging && currentElement) {
                 e.preventDefault();
                 const pos = getEventPos(e);
@@ -974,10 +997,16 @@
         document.addEventListener('touchend', handleEnd);
 
         // ==========================================
-        // Download Engine
+        // Download Engine & Fixes for Mobile
         // ==========================================
         function downloadPhotocard() {
             clearSelection(); 
+            
+            // html2canvas clipping/shifting fix for mobile
+            window.scrollTo(0, 0); 
+            document.body.scrollTop = 0; 
+            document.documentElement.scrollTop = 0;
+
             document.fonts.ready.then(() => {
                 const originalTransform = photocard.style.transform;
                 const originalOrigin = photocard.style.transformOrigin;
@@ -992,7 +1021,8 @@
                     height: 1080,  
                     useCORS: true,
                     allowTaint: true,
-                    backgroundColor: '#2b2b2d'
+                    backgroundColor: '#2b2b2d',
+                    scrollY: -window.scrollY
                 }).then(canvas => {
                     photocard.style.transform = originalTransform;
                     photocard.style.transformOrigin = originalOrigin;
