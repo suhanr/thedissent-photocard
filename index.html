@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Dissent - Photocard Studio</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
+
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
+<body>
     <div class="side-panel left-panel">
         <h1 class="header-title">Photocard Studio</h1>
         <div class="panel-card">
@@ -21,13 +22,16 @@
         </div>
         <div class="panel-card">
             <h3 class="card-header">✍️ হেডিং ও টেক্সট</h3>
-            <label>টাইটেল টেক্সট <span style="font-weight:normal; color:#888; font-size:12px;">(হলুদ করতে লেখার দুইপাশে * দিন। যেমনঃ *হ্যালো*)</span></label>
-            <textarea id="textInput" placeholder="সন্দেহজনক ওয়েবসাইটকে ‘মার্কিন গণমাধ্যম’ সাজিয়ে *ভুয়া তথ্য ছড়াচ্ছে আ.লীগ*"></textarea>
+            <label>টাইটেল টেক্সট <span style="font-weight:normal; color:#515050; font-size:14px;">(হলুদ করতে লেখার
+                    দুইপাশে * দিন। যেমনঃ *হ্যালো*)</span></label>
+            <textarea id="textInput"
+                placeholder="সন্দেহজনক ওয়েবসাইটকে ‘মার্কিন গণমাধ্যম’ সাজিয়ে *ভুয়া তথ্য ছড়াচ্ছে আ.লীগ*"></textarea>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top:15px;">
                 <label style="margin:0;">সাবহেডিং (মেইন টেক্সটের উপরে)</label>
                 <input type="color" id="subTextColor" value="#e0e0e0" title="সাবহেডিং কালার">
             </div>
-            <textarea id="subTextInput" placeholder="সন্দেহজনক ওয়েবসাইটকে *মার্কিন গণমাধ্যম*" style="height: 60px; margin-top: 8px;"></textarea>
+            <textarea id="subTextInput" placeholder="সন্দেহজনক ওয়েবসাইটকে *মার্কিন গণমাধ্যম*"
+                style="height: 70px; margin-top: 8px;"></textarea>
         </div>
     </div>
 
@@ -44,8 +48,12 @@
                 <div class="main-text" id="textDisplay"></div>
             </div>
             <div class="footer">
-                <span><img crossorigin="anonymous" src="https://img.icons8.com/?size=100&id=118467&format=png&color=FFFFFF" style="width:35px">TheDissent</span>
-                <span><img crossorigin="anonymous" src="https://img.icons8.com/?size=100&id=rhvV5hIsMYPE&format=png&color=FFFFFF" style="width:35px">thedissent.news</span>
+                <span><img crossorigin="anonymous"
+                        src="https://img.icons8.com/?size=100&id=118467&format=png&color=FFFFFF"
+                        style="width:35px">TheDissent</span>
+                <span><img crossorigin="anonymous"
+                        src="https://img.icons8.com/?size=100&id=rhvV5hIsMYPE&format=png&color=FFFFFF"
+                        style="width:35px">thedissent.news</span>
             </div>
         </div>
     </div>
@@ -60,7 +68,8 @@
                 <button type="button" class="format-btn" onclick="addShape('square')">⬛ স্কয়ার </button>
                 <button type="button" class="format-btn" onclick="addShape('circle')">⚫ সার্কেল</button>
                 <button type="button" class="format-btn" onclick="addShape('line')">➖ লাইন</button>
-                <select id="stickerSelect" class="format-btn" onchange="addSticker(this.value); this.value='';" style="width: auto; padding: 8px;">
+                <select id="stickerSelect" class="format-btn" onchange="addSticker(this.value); this.value='';"
+                    style="width: auto; padding: 8px;">
                     <option value="">স্টিকার...</option>
                     <option value="⭐">⭐ স্টার</option>
                     <option value="🔥">🔥 ফায়ার</option>
@@ -72,7 +81,9 @@
                 </select>
             </div>
             <label style="margin-top: 20px;">কাস্টম টেক্সট</label>
-            <button type="button" class="btn-primary" style="margin-top: 5px; background: var(--bg-gradient); color: var(--primary-text); border: 1px solid var(--input-border); box-shadow: none;" onclick="addCustomText()">
+            <button type="button" class="btn-primary"
+                style="margin-top: 5px; background: var(--bg-gradient); color: var(--primary-text); border: 1px solid var(--input-border); box-shadow: none;"
+                onclick="addCustomText()">
                 + নতুন কাস্টম টেক্সট
             </button>
         </div>
@@ -80,13 +91,18 @@
     </div>
 
     <div id="advancedPanel" class="popup-panel">
-        <h3 class="card-header drag-handle-popup" id="popupHeader" style="color: var(--primary-text); font-size: 20px; justify-content: space-between; margin-bottom: 20px;">
+        <h3 class="card-header drag-handle-popup" id="popupHeader"
+            style="color: var(--primary-text); font-size: 20px; justify-content: space-between; margin-bottom: 20px;">
             <span style="pointer-events: none;">🎨 প্রোপার্টিজ (Drag me)</span>
-            <span style="font-size: 14px; font-weight: normal; cursor:pointer; color:var(--danger); background:rgba(255,0,0,0.1); padding:4px 10px; border-radius:12px;" onclick="closePopup()">✕ বন্ধ</span>
+            <span
+                style="font-size: 14px; font-weight: normal; cursor:pointer; color:var(--danger); background:rgba(255,0,0,0.1); padding:4px 10px; border-radius:12px;"
+                onclick="closePopup()">✕ বন্ধ</span>
         </h3>
 
-        <div id="textControls" style="display: none; margin-bottom:15px; border-bottom:1px solid rgba(0,0,0,0.05); padding-bottom:15px;">
-            <textarea id="editActiveText" style="height: 60px; margin-bottom: 12px; font-size:14px;" placeholder="টেক্সট এডিট করুন..."></textarea>
+        <div id="textControls"
+            style="display: none; margin-bottom:15px; border-bottom:1px solid rgba(0,0,0,0.05); padding-bottom:15px;">
+            <textarea id="editActiveText" style="height: 60px; margin-bottom: 12px; font-size:14px;"
+                placeholder="টেক্সট এডিট করুন..."></textarea>
             <div style="display: flex; gap: 6px; margin-bottom: 15px;">
                 <button type="button" class="format-btn" onclick="formatActiveText('bold')"><b>B</b></button>
                 <button type="button" class="format-btn" onclick="formatActiveText('italic')"><i>I</i></button>
@@ -113,18 +129,21 @@
                 <label style="margin-top:0;">ব্যাকগ্রাউন্ড</label>
                 <div style="display: flex; align-items:center; gap:10px;">
                     <input type="color" id="propBg">
-                    <label style="margin:0; font-size: 12px; display:flex; align-items:center; gap:5px; cursor:pointer;">
+                    <label
+                        style="margin:0; font-size: 12px; display:flex; align-items:center; gap:5px; cursor:pointer;">
                         <input type="checkbox" id="propBgTrans" style="width:24px; height:14px;"> ট্রান্সপারেন্ট
                     </label>
                 </div>
             </div>
         </div>
 
-        <div class="prop-row" id="borderControlDiv" style="display: none; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom:15px; margin-bottom:15px;">
+        <div class="prop-row" id="borderControlDiv"
+            style="display: none; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom:15px; margin-bottom:15px;">
             <div style="width: 100%;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <label style="margin:0;">ছবির বর্ডার</label>
-                    <input type="color" id="propBorderColor" value="#ffffff" style="width: 30px; height: 30px; padding: 0; border: none;">
+                    <input type="color" id="propBorderColor" value="#ffffff"
+                        style="width: 30px; height: 30px; padding: 0; border: none;">
                 </div>
                 <div style="display:flex; align-items:center; gap:10px;">
                     <input type="range" id="propBorderWidth" min="0" max="50" value="0">
@@ -176,4 +195,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
