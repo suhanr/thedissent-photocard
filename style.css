@@ -49,7 +49,7 @@ body {
 }
 
 /* ==========================================
-   3. Control Panels
+   3. Control Panels (Left & Right Columns)
    ========================================== */
 .side-panel {
     flex: 0 0 320px;
@@ -95,125 +95,229 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
     padding-bottom: 12px;
 }
 
 /* ==========================================
-   4. Inputs & Forms
+   4. Inputs & Forms Elements
    ========================================== */
 label {
-    display: block;
-    font-size: 14px;
-    font-weight: bold;
-    color: var(--secondary-text);
-    margin-bottom: 8px;
-    margin-top: 16px;
+    display: block; font-size: 14px; font-weight: bold;
+    color: var(--secondary-text); margin-bottom: 8px; margin-top: 16px;
+}
+label:first-of-type { margin-top: 0; }
+
+input[type="text"], input[type="file"], textarea, select {
+    width: 100%; padding: 12px 16px; font-size: 15px; background: var(--input-bg);
+    border: 1px solid var(--input-border); border-radius: 10px; box-sizing: border-box;
+    font-family: inherit; color: var(--primary-text); transition: var(--transition);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
 }
 
-label:first-of-type {
-    margin-top: 0;
-}
-
-input[type="text"],
-input[type="file"],
-textarea,
-select {
-    width: 100%;
-    padding: 12px 16px;
-    font-size: 15px;
-    background: var(--input-bg);
-    border: 1px solid var(--input-border);
-    border-radius: 10px;
-    box-sizing: border-box;
-    font-family: inherit;
-    color: var(--primary-text);
-    transition: var(--transition);
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02);
-}
-
-input[type="text"]:focus,
-textarea:focus,
-select:focus {
-    outline: none;
-    background: #ffffff;
-    border-color: var(--accent);
+input[type="text"]:focus, textarea:focus, select:focus {
+    outline: none; background: #ffffff; border-color: var(--accent);
     box-shadow: 0 0 0 3px rgba(41, 112, 255, 0.15);
 }
 
-textarea {
-    height: 90px;
-    resize: vertical;
-}
+textarea { height: 90px; resize: vertical; }
 
 .help-text {
-    font-size: 13px;
-    color: var(--secondary-text);
-    margin-top: 6px;
-    display: block;
-    line-height: 1.4;
+    font-size: 13px; color: var(--secondary-text); margin-top: 6px;
+    display: block; line-height: 1.4;
 }
 
 /* ==========================================
    5. Buttons
    ========================================== */
 button {
-    font-family: 'Shurjo', sans-serif;
-    padding: 14px;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: var(--transition);
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    font-family: 'Shurjo', sans-serif; padding: 14px; border-radius: 10px;
+    font-size: 16px; font-weight: bold; cursor: pointer; transition: var(--transition);
+    border: none; display: flex; align-items: center; justify-content: center; gap: 8px;
 }
 
 .btn-primary {
-    width: 100%;
-    background: var(--primary-text);
-    color: white;
-    margin-top: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%; background: var(--primary-text); color: white;
+    margin-top: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-
-.btn-primary:hover {
-    background: #000000;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.btn-primary:active {
-    transform: translateY(1px) scale(0.98);
-}
+.btn-primary:hover { background: #000000; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
+.btn-primary:active { transform: translateY(1px) scale(0.98); }
 
 .btn-accent {
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-    color: white;
-    width: 100%;
-    box-shadow: 0 4px 12px rgba(41, 112, 255, 0.3);
+    color: white; width: 100%; box-shadow: 0 4px 12px rgba(41, 112, 255, 0.3);
 }
-
-.btn-accent:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(41, 112, 255, 0.4);
-}
+.btn-accent:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(41, 112, 255, 0.4); }
 
 .format-btn {
-    background: var(--input-bg);
-    border: 1px solid var(--input-border);
-    color: var(--primary-text);
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 14px;
-    flex: 1;
+    background: var(--input-bg); border: 1px solid var(--input-border);
+    color: var(--primary-text); padding: 8px 12px; border-radius: 8px;
+    font-size: 14px; flex: 1;
+}
+.format-btn:hover { background: #ffffff; border-color: #d1d1d6; transform: translateY(-1px); }
+
+/* ==========================================
+   6. Switches & Sliders
+   ========================================== */
+input[type="checkbox"] {
+    appearance: none; width: 40px; height: 22px; background: #e5e5ea; border-radius: 20px;
+    position: relative; cursor: pointer; transition: var(--transition); outline: none; border: 1px solid rgba(0,0,0,0.05);
+}
+input[type="checkbox"]::after {
+    content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px;
+    background: white; border-radius: 50%; transition: var(--transition); box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+input[type="checkbox"]:checked { background: var(--accent); border-color: var(--accent); }
+input[type="checkbox"]:checked::after { transform: translateX(18px); }
+
+input[type="range"] {
+    appearance: none; width: 100%; height: 4px; background: #e5e5ea; border-radius: 2px; outline: none; margin-top: 10px;
+}
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none; width: 18px; height: 18px; background: white; border-radius: 50%;
+    border: 2px solid var(--accent); box-shadow: 0 2px 6px rgba(0,0,0,0.15); cursor: pointer; transition: transform 0.1s;
+}
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+
+input[type="color"] {
+    appearance: none; border: none; width: 32px; height: 32px; border-radius: 50%;
+    cursor: pointer; padding: 0; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+input[type="color"]::-webkit-color-swatch { border: none; border-radius: 50%; }
+
+/* ==========================================
+   7. Floating Draggable Popup Panel
+   ========================================== */
+.popup-panel {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    z-index: 1000;
+    width: 90%; max-width: 400px;
+    max-height: 85vh; overflow-y: auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    padding: 25px; border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.5) inset;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    margin: 0 !important;
 }
 
-.format-btn:hover {
-    background: #ffffff;
-    border-color: #d1d1d6;
-    transform: translateY(-1px);
+.popup-panel.show { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+.drag-handle-popup { cursor: grab; user-select: none; }
+.drag-handle-popup:active { cursor: grabbing; }
+
+.prop-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+
+/* ==========================================
+   8. Preview & Canvas Area
+   ========================================== */
+.preview-wrapper {
+    flex: 1; display: flex; justify-content: center; align-items: flex-start;
+    overflow: hidden; position: relative; padding-top: 10px; min-width: 350px;
+}
+
+#photocard {
+    width: 1080px; height: 1080px; min-width: 1080px; min-height: 1080px;
+    max-width: 1080px; max-height: 1080px; background-color: #2b2b2d; position: relative; box-sizing: border-box;
+    display: flex; flex-direction: column; transform-origin: top center; overflow: hidden; border-radius: 4px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15), 0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* ==========================================
+   9. Draggable Elements
+   ========================================== */
+.image-container { width: 1080px; height: 600px; background: white; position: relative; overflow: hidden; }
+
+.draggable-image, .draggable-shape {
+    position: absolute; background-size: cover; background-position: center; background-repeat: no-repeat;
+    cursor: move; z-index: 10; min-width: 50px; min-height: 50px; box-sizing: border-box; touch-action: none; transition: filter 0.2s;
+}
+
+.draggable-text {
+    position: absolute; cursor: move; z-index: 20; padding: 8px 16px; border-radius: 8px;
+    font-family: 'Shurjo', sans-serif; font-weight: bold; white-space: pre-wrap; box-sizing: border-box;
+    touch-action: none; border: 2px solid transparent; min-width: 50px; min-height: 50px;
+}
+
+.text-content { width: 100%; height: 100%; outline: none; }
+
+.draggable-image:hover, .draggable-shape:hover, .draggable-text:hover { filter: brightness(0.95); }
+
+.active-element {
+    border: 2px solid var(--accent) !important;
+    box-shadow: 0 0 0 4px rgba(41, 112, 255, 0.15);
+    z-index: 30 !important; filter: none !important;
+}
+
+/* Resize Handles - আরও বড় করা হয়েছে */
+.resize-handle {
+    width: 24px; height: 24px; background: white; border: 2px solid var(--accent); border-radius: 50%;
+    position: absolute; display: none; z-index: 40; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.active-element .resize-handle { display: block !important; }
+
+.nw { top: -12px; left: -12px; cursor: nwse-resize; }
+.ne { top: -12px; right: -12px; cursor: nesw-resize; }
+.sw { bottom: -12px; left: -12px; cursor: nesw-resize; }
+.se { bottom: -12px; right: -12px; cursor: nwse-resize; }
+
+/* Action Buttons - এডিট ও ডিলিট বাটন বড় করা হয়েছে */
+.action-btn {
+    position: absolute; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(4px);
+    width: 40px; height: 40px; text-align: center; line-height: 38px; border-radius: 50%;
+    cursor: pointer; font-family: sans-serif; font-weight: bold; font-size: 18px;
+    display: none; z-index: 40; box-shadow: 0 2px 6px rgba(0,0,0,0.2); border: 1px solid rgba(0,0,0,0.05); transition: var(--transition);
+}
+.active-element .action-btn { display: block !important; }
+
+.delete-btn { top: -20px; right: -20px; color: var(--danger); }
+.delete-btn:hover { background: var(--danger); color: white; transform: scale(1.1); }
+
+.edit-btn { top: -20px; right: 30px; color: var(--accent); }
+.edit-btn:hover { background: var(--accent); color: white; transform: scale(1.1); }
+
+#photocard.exporting .draggable-image, #photocard.exporting .draggable-shape, #photocard.exporting .draggable-text { border: none !important; box-shadow: none !important; }
+#photocard.exporting .resize-handle, #photocard.exporting .action-btn { display: none !important; }
+
+/* ==========================================
+   10. Photocard Inner Elements
+   ========================================== */
+.middle-bar { height: 60px; display: flex; justify-content: space-between; align-items: center; padding: 0 40px; padding-top: 20px; padding-bottom: 5px; color: white; font-family: 'Shurjo', serif; }
+.category { font-size: 30px; font-weight: 500; width: 30%; white-space: nowrap; }
+.logo-area { width: 40%; text-align: center; display: flex; justify-content: center; align-items: center; }
+.logo-area img { height: 60px; max-width: 100%; }
+.date { font-size: 30px; font-weight: 500; width: 30%; text-align: right; white-space: nowrap; }
+
+.text-block { 
+    background-color: #38383a; margin: 10px 0px; padding: 30px; 
+    height: 360px; display: flex; flex-direction: column; gap: 15px; align-items: center; justify-content: center; 
+    text-align: center; box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); 
+    width: 100%; box-sizing: border-box;
+}
+.main-text { font-family: 'Shurjo', serif; font-size: 63px; color: white; line-height: 1.1; font-weight: 600; padding-left: 75px; padding-right: 75px; width: 100%; box-sizing: border-box; }
+.sub-text { font-family: 'Shurjo', serif; font-size: 38px; color: #e0e0e0; line-height: 1.3; font-weight: 500; padding-left: 50px; padding-right: 50px; display: none; margin-bottom: 10px; width: 100%; box-sizing: border-box; }
+.text-yellow { color: #f1f226; }
+
+.footer { height: 40px; display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 40px 10px 40px; color: white; font-size: 22px; font-family: 'Segoe UI', sans-serif; }
+.footer span { display: flex; align-items: center; gap: 8px; }
+
+/* ==========================================
+   11. Mobile Responsiveness
+   ========================================== */
+@media (max-width: 1050px) {
+    body { padding: 15px; flex-direction: column; gap: 20px; }
+    .side-panel { width: 100%; max-width: 100%; flex: none; order: 2; gap: 15px;}
+    .right-panel { order: 3; }
+    
+    /* ফিক্স: মোবাইলের জন্য ডিসপ্লে ব্লক করা হয়েছে যাতে ক্যানভাস গায়েব না হয় */
+    .preview-wrapper { display: block; order: 1; width: 100%; min-width: 0; padding-top: 5px; flex: none; }
+    
+    .panel-card { padding: 18px; margin-bottom: 0; }
+    .popup-panel { width: 90%; }
 }
