@@ -1,0 +1,219 @@
+/* ==========================================
+   1. Typography Setup
+   ========================================== */
+@font-face {
+    font-family: 'Shurjo';
+    src: url('Shurjo-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Shurjo';
+    src: url('Shurjo-bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* ==========================================
+   2. CSS Variables (Design System)
+   ========================================== */
+:root {
+    --bg-gradient: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+    --panel-bg: rgba(255, 255, 255, 0.75);
+    --panel-border: rgba(255, 255, 255, 0.6);
+    --blur: blur(24px);
+    --primary-text: #1a1a1c;
+    --secondary-text: #5e5e62;
+    --accent: #2970ff;
+    --accent-hover: #1455db;
+    --danger: #ff3b30;
+    --input-bg: rgba(255, 255, 255, 0.9);
+    --input-border: rgba(0, 0, 0, 0.08);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+    --transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+body {
+    font-family: 'Shurjo', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    margin: 0;
+    padding: 30px;
+    display: flex;
+    gap: 30px;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    color: var(--primary-text);
+}
+
+/* ==========================================
+   3. Control Panels
+   ========================================== */
+.side-panel {
+    flex: 0 0 320px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header-title {
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: -0.5px;
+    margin-top: 0;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.panel-card {
+    background: var(--panel-bg);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1px solid var(--panel-border);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.panel-card:hover {
+    box-shadow: var(--shadow-md);
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.card-header {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--accent);
+    margin-top: 0;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 12px;
+}
+
+/* ==========================================
+   4. Inputs & Forms
+   ========================================== */
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--secondary-text);
+    margin-bottom: 8px;
+    margin-top: 16px;
+}
+
+label:first-of-type {
+    margin-top: 0;
+}
+
+input[type="text"],
+input[type="file"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 15px;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-family: inherit;
+    color: var(--primary-text);
+    transition: var(--transition);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    background: #ffffff;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(41, 112, 255, 0.15);
+}
+
+textarea {
+    height: 90px;
+    resize: vertical;
+}
+
+.help-text {
+    font-size: 13px;
+    color: var(--secondary-text);
+    margin-top: 6px;
+    display: block;
+    line-height: 1.4;
+}
+
+/* ==========================================
+   5. Buttons
+   ========================================== */
+button {
+    font-family: 'Shurjo', sans-serif;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    width: 100%;
+    background: var(--primary-text);
+    color: white;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    background: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+.btn-accent {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+    color: white;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(41, 112, 255, 0.3);
+}
+
+.btn-accent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(41, 112, 255, 0.4);
+}
+
+.format-btn {
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--primary-text);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    flex: 1;
+}
+
+.format-btn:hover {
+    background: #ffffff;
+    border-color: #d1d1d6;
+    transform: translateY(-1px);
+}
