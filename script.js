@@ -10,16 +10,19 @@ const advancedPanel = document.getElementById('advancedPanel');
 
 let appScale = 0.5;
 
-// Auto Scaling Setup (Mobile Fix)
+// ==========================================
+// Auto Scaling Setup (Mobile Fix Applied)
+// ==========================================
 function adjustScale() {
     const wrapperWidth = previewWrapper.clientWidth;
     if (window.innerWidth <= 1050) { 
         appScale = wrapperWidth / 1080; 
+        photocard.style.transformOrigin = 'top left'; // মোবাইলের জন্য টপ-লেফট
     } else { 
         appScale = Math.min(0.65, wrapperWidth / 1100); 
+        photocard.style.transformOrigin = 'top center'; // ডেস্কটপের জন্য টপ-সেন্টার
     }
     
-    photocard.style.transformOrigin = 'top center';
     photocard.style.transform = `scale(${appScale})`;
     previewWrapper.style.height = `${1080 * appScale}px`;
 }
@@ -63,7 +66,6 @@ function createHandles(wrapper, handlesArr) {
     editBtn.className = 'action-btn edit-btn';
     editBtn.innerHTML = '✏️';
     editBtn.title = "এডিট";
-    // Mobile touch and mouse click support
     editBtn.onclick = (e) => { e.stopPropagation(); setActiveElement(wrapper); openPopup(); }
     editBtn.ontouchstart = (e) => { e.preventDefault(); e.stopPropagation(); setActiveElement(wrapper); openPopup(); }
     wrapper.appendChild(editBtn);
@@ -72,7 +74,6 @@ function createHandles(wrapper, handlesArr) {
     delBtn.className = 'action-btn delete-btn';
     delBtn.innerHTML = '✕';
     delBtn.title = "ডিলিট";
-    // Mobile touch and mouse click support
     delBtn.onclick = (e) => { e.stopPropagation(); wrapper.remove(); clearSelection(); }
     delBtn.ontouchstart = (e) => { e.preventDefault(); e.stopPropagation(); wrapper.remove(); clearSelection(); }
     wrapper.appendChild(delBtn);
@@ -195,7 +196,6 @@ function setActiveElement(el) {
     if(!el) return;
     el.classList.add('active-element');
     
-    // Update popup info if already open
     if(advancedPanel.classList.contains('show')) {
         openPopup();
     }
@@ -204,7 +204,6 @@ function setActiveElement(el) {
 function openPopup() {
     if(!activeEl) return;
     
-    // Ensure centered only if it has never been dragged
     if (!advancedPanel.style.left || advancedPanel.style.left === '50%') {
         advancedPanel.style.top = '50%';
         advancedPanel.style.left = '50%';
@@ -393,10 +392,8 @@ function handleStart(e) {
         return;
     }
 
-    // Click inside popup panel -> do nothing
     if (e.target.closest('.popup-panel')) return;
 
-    // Element Resizing
     if (e.target.classList.contains('resize-handle')) {
         isResizing = true;
         currentHandle = e.target;
@@ -413,7 +410,6 @@ function handleStart(e) {
         setActiveElement(currentElement);
         e.preventDefault(); e.stopPropagation();
     } 
-    // Element Dragging
     else if (e.target.classList.contains('drag-handle') || e.target.closest('.item-element')) {
         isDragging = true;
         currentElement = e.target.closest('.item-element');
@@ -511,11 +507,14 @@ function downloadPhotocard() {
         html2canvas(photocard, {
             scale: 2,
             width: 1080,   
-            height: 1080,  
+            height: 1080,
+            windowWidth: 1080,
+            windowHeight: 1080,
             useCORS: true,
             allowTaint: true,
             backgroundColor: '#2b2b2d',
-            scrollY: -window.scrollY
+            scrollY: 0,
+            scrollX: 0
         }).then(canvas => {
             photocard.style.transform = originalTransform;
             photocard.style.transformOrigin = originalOrigin;
