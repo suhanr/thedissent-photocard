@@ -378,7 +378,7 @@ input[type="color"]::-webkit-color-swatch {
     flex-direction: column;
     transform-origin: top center;
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: 10px;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15), 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
@@ -387,7 +387,7 @@ input[type="color"]::-webkit-color-swatch {
    ========================================== */
 .image-container {
     width: 1080px;
-    height: 750px;        /* fixed: 750px for balance elements */
+    height: 830px;        /* fixed: 750px for balance elements */
     background: white;
     position: relative;
     overflow: hidden;
@@ -530,7 +530,7 @@ input[type="color"]::-webkit-color-swatch {
    10. Photocard Inner Elements
    ========================================== */
 .middle-bar {
-    height: 45px;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -542,14 +542,14 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .category {
-    font-size: 30px;
+    font-size: 35px;
     font-weight: 600;
     width: 30%;
     white-space: nowrap;
 }
 
 .logo-area {
-    width: 40%;
+    width: 50%;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -557,12 +557,12 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .logo-area img {
-    height: 60px;
+    height: 65px;
     max-width: 100%;
 }
 
 .date {
-    font-size: 30px;
+    font-size: 35px;
     font-weight: 600;
     width: 30%;
     text-align: right;
@@ -573,7 +573,8 @@ input[type="color"]::-webkit-color-swatch {
     background-color: #38383a;
     margin: 10px 0px;
     padding: 30px;
-    height: 480px;        /* fixed: for balance 480px */
+    height: auto;
+    flex-grow: 1;        /* fixed: for balance 480px */
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -587,7 +588,7 @@ input[type="color"]::-webkit-color-swatch {
 
 .main-text {
     font-family: 'Shurjo', serif;
-    font-size: 65px;
+    font-size: 70px;
     color: white;
     line-height: 1.1;
     font-weight: 600;
@@ -599,7 +600,7 @@ input[type="color"]::-webkit-color-swatch {
 
 .sub-text {
     font-family: 'Shurjo', serif;
-    font-size: 38px;
+    font-size: 46px;
     color: #f1f226;
     line-height: 1.1;
     font-weight: 600;
