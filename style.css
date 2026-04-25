@@ -366,11 +366,11 @@ input[type="color"]::-webkit-color-swatch {
 
 #photocard {
     width: 1080px;
-    height: 1350px;       /* ফিক্সড: 1350px করা হয়েছে */
+    height: 1350px;       /* fixed: 1350px done*/
     min-width: 1080px;
-    min-height: 1350px;   /* ফিক্সড: 1350px করা হয়েছে */
+    min-height: 1350px;   /* fixed: 1350px done */
     max-width: 1080px;
-    max-height: 1350px;   /* ফিক্সড: 1350px করা হয়েছে */
+    max-height: 1350px;   /* fixed: 1350px done */
     background-color: #2b2b2d;
     position: relative;
     box-sizing: border-box;
@@ -387,7 +387,7 @@ input[type="color"]::-webkit-color-swatch {
    ========================================== */
 .image-container {
     width: 1080px;
-    height: 750px;        /* ফিক্সড: ব্যালেন্স করার জন্য 750px করা হয়েছে */
+    height: 750px;        /* fixed: 750px for balance elements */
     background: white;
     position: relative;
     overflow: hidden;
@@ -573,7 +573,7 @@ input[type="color"]::-webkit-color-swatch {
     background-color: #38383a;
     margin: 10px 0px;
     padding: 30px;
-    height: 480px;        /* ফিক্সড: ব্যালেন্স করার জন্য 480px করা হয়েছে */
+    height: 480px;        /* fixed: for balance 480px */
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -644,7 +644,7 @@ input[type="color"]::-webkit-color-swatch {
         gap: 20px;
     }
     
-    /* মোবাইলের হেডিং টপে শো করানো */
+    /* mobile heading show for top */
     .mobile-header {
         display: flex;
         order: 0;
