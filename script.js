@@ -56,7 +56,7 @@ function rgb2hex(rgb) {
     return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
 }
 
-// Add action buttons and handles
+// Add action buttons and handles (Updated with Crop Button)
 function createHandles(wrapper, handlesArr) {
     handlesArr.forEach(pos => {
         const handle = document.createElement('div');
@@ -71,6 +71,33 @@ function createHandles(wrapper, handlesArr) {
     editBtn.onclick = (e) => { e.stopPropagation(); setActiveElement(wrapper); openPopup(); }
     editBtn.ontouchstart = (e) => { e.preventDefault(); e.stopPropagation(); setActiveElement(wrapper); openPopup(); }
     wrapper.appendChild(editBtn);
+
+    // new crop button for image
+    if (wrapper.classList.contains('draggable-image')) {
+        const cropBtn = document.createElement('div');
+        cropBtn.className = 'action-btn crop-btn';
+        cropBtn.innerHTML = '✂️';
+        cropBtn.title = "ক্রপ করুন";
+
+        const openReCrop = (e) => {
+            e.stopPropagation(); e.preventDefault();
+            setActiveElement(wrapper);
+            croppingElement = wrapper;
+            currentOriginalImage = wrapper.dataset.originalImage;
+
+            cropOverlay.style.display = 'block';
+            cropModal.classList.add('show');
+            cropTargetImage.src = currentOriginalImage;
+
+            if (cropper) cropper.destroy();
+            cropper = new Cropper(cropTargetImage, {
+                viewMode: 1, autoCropArea: 0.8, background: false, zoomable: true
+            });
+        };
+        cropBtn.onclick = openReCrop;
+        cropBtn.ontouchstart = openReCrop;
+        wrapper.appendChild(cropBtn);
+    }
 
     const delBtn = document.createElement('div');
     delBtn.className = 'action-btn delete-btn';
@@ -89,26 +116,99 @@ function adjustLayer(change) {
     activeEl.style.zIndex = newZ;
 }
 
-// Add Image
-imgUpload.addEventListener('change', function (e) {
-    Array.from(e.target.files).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = function (event) {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'draggable-image drag-handle item-element';
-            wrapper.style.width = '400px'; wrapper.style.height = '400px';
-            wrapper.style.left = '50px'; wrapper.style.top = '50px';
-            wrapper.style.backgroundImage = `url(${event.target.result})`;
-            wrapper.dataset.baseZ = 10; wrapper.style.zIndex = 10;
+// ==========================================
+// croper logic and image uploader(Advanced)
+// ==========================================
+let cropper = null;
+let croppingElement = null; // for crop element tracking
+let currentOriginalImage = null; // for keep original pic
 
-            createHandles(wrapper, ['nw', 'ne', 'sw', 'se']);
-            imageContainer.appendChild(wrapper);
-            setActiveElement(wrapper);
+const cropModal = document.getElementById('cropModal');
+const cropOverlay = document.getElementById('cropModalOverlay');
+const cropTargetImage = document.getElementById('cropTargetImage');
+
+// Add Image (Cropper Modal Logic)
+imgUpload.addEventListener('change', function (e) {
+    if (e.target.files && e.target.files.length > 0) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+            currentOriginalImage = event.target.result;
+            croppingElement = null; //new image uploading
+
+            // show pop-up
+            cropOverlay.style.display = 'block';
+            cropModal.classList.add('show');
+            cropModal.style.top = '50%';
+            cropModal.style.left = '50%';
+            cropModal.style.transform = 'translate(-50%, -50%)';
+
+            cropTargetImage.src = currentOriginalImage;
+
+            // cropper start
+            if (cropper) {
+                cropper.destroy();
+            }
+            cropper = new Cropper(cropTargetImage, {
+                viewMode: 1,
+                autoCropArea: 0.8,
+                background: false,
+                zoomable: true,
+            });
         }
         reader.readAsDataURL(file);
-    });
-    this.value = '';
+    }
+    this.value = ''; // Reset input
 });
+
+function closeCropModal() {
+    cropOverlay.style.display = 'none';
+    cropModal.classList.remove('show');
+    if (cropper) {
+        cropper.destroy();
+        cropper = null;
+    }
+}
+
+function applyCrop() {
+    if (!cropper) return;
+
+    // crop canvas
+    const canvas = cropper.getCroppedCanvas({
+        imageSmoothingEnabled: true,
+        imageSmoothingQuality: 'high',
+    });
+    const croppedDataUrl = canvas.toDataURL('image/png');
+
+    if (croppingElement) {
+        // for crop again(multiple)
+        croppingElement.style.backgroundImage = `url(${croppedDataUrl})`;
+        croppingElement = null;
+    } else {
+        // for new image
+        const wrapper = document.createElement('div');
+        wrapper.className = 'draggable-image drag-handle item-element';
+
+        // ratio size
+        const defaultWidth = 400;
+        const defaultHeight = (canvas.height / canvas.width) * defaultWidth;
+
+        wrapper.style.width = defaultWidth + 'px';
+        wrapper.style.height = defaultHeight + 'px';
+        wrapper.style.left = '50px';
+        wrapper.style.top = '50px';
+        wrapper.style.backgroundImage = `url(${croppedDataUrl})`;
+        wrapper.dataset.originalImage = currentOriginalImage; // for saving original pic
+        wrapper.dataset.baseZ = 10; wrapper.style.zIndex = 10;
+
+        createHandles(wrapper, ['nw', 'ne', 'sw', 'se']);
+        imageContainer.appendChild(wrapper);
+        setActiveElement(wrapper);
+    }
+
+    closeCropModal();
+}
 
 // Add Shape
 function addShape(type) {
@@ -488,7 +588,7 @@ document.addEventListener('touchmove', handleMove, { passive: false });
 document.addEventListener('touchend', handleEnd);
 
 // ==========================================
-// Download Engine & Fixes for Mobile (Updated for 1350)
+// Download Engine & Fixes for Mobile (Updated for 1350 & scale 1)
 // ==========================================
 function downloadPhotocard() {
     clearSelection();
@@ -508,9 +608,9 @@ function downloadPhotocard() {
         html2canvas(photocard, {
             scale: 2,
             width: 1080,
-            height: 1350,  // fixed: height will be 1350 px
+            height: 1350,
             windowWidth: 1080,
-            windowHeight: 1350, // fixed: height will be 1350px
+            windowHeight: 1350,
             useCORS: true,
             allowTaint: true,
             backgroundColor: '#2b2b2d',
