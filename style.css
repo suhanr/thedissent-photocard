@@ -387,7 +387,7 @@ input[type="color"]::-webkit-color-swatch {
    ========================================== */
 .image-container {
     width: 1080px;
-    height: 800px;        /* fixed: 750px for balance elements */
+    height: 780px;        /* fixed: 780px for balance elements */
     background: white;
     position: relative;
     overflow: hidden;
@@ -557,7 +557,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .logo-area img {
-    height: 70px;
+    height: 67px;
     max-width: 100%;
 }
 
