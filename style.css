@@ -530,7 +530,7 @@ input[type="color"]::-webkit-color-swatch {
    10. Photocard Inner Elements
    ========================================== */
 .middle-bar {
-    height: 70px;
+    height: 75px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -542,7 +542,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .category {
-    font-size: 35px;
+    font-size: 37px;
     font-weight: 600;
     width: 30%;
     white-space: nowrap;
@@ -557,12 +557,12 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .logo-area img {
-    height: 65px;
+    height: 70px;
     max-width: 100%;
 }
 
 .date {
-    font-size: 35px;
+    font-size: 37px;
     font-weight: 600;
     width: 30%;
     text-align: right;
@@ -617,13 +617,13 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .footer {
-    height: 30px;
+    height: 45px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 0px 40px 16px 40px;
+    padding: 15px 40px 15px 40px;
     color: white;
-    font-size: 25px;
+    font-size: 30px;
     font-family: 'Segoe UI', sans-serif;
 }
 
