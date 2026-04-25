@@ -596,7 +596,7 @@ input[type="color"]::-webkit-color-swatch {
 .text-block {
     background-color: #38383a;
     margin: 10px 0px;
-    padding: 100px 105px 100px 105px;
+    padding: 80px 105px 80px 105px;
     height: auto;
     flex-grow: 1;
     /* fixed: for balance 480px */
@@ -613,7 +613,7 @@ input[type="color"]::-webkit-color-swatch {
 
 .main-text {
     font-family: 'Shurjo', serif;
-    font-size: 75px;
+    font-size: 78px;
     color: white;
     line-height: 1.1;
     font-weight: 600;
@@ -623,12 +623,10 @@ input[type="color"]::-webkit-color-swatch {
 
 .sub-text {
     font-family: 'Shurjo', serif;
-    font-size: 50px;
+    font-size: 53px;
     color: #f1f226;
     line-height: 1.1;
     font-weight: 600;
-    padding-left: 75px;
-    padding-right: 75px;
     display: none;
     margin-bottom: 10px;
     width: 100%;
