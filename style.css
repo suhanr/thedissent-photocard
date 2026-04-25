@@ -60,20 +60,14 @@ body {
 }
 
 .header-title {
-    font-size: 30px;
+  font-size: 30px;
     font-weight: bold;
-    font-family: 'Helvetica';
     letter-spacing: -0.5px;
     margin-top: 0;
     margin-bottom: 5px;
     display: flex;
     align-items: center;
     gap: 10px;
-    background: var(--panel-bg);
-    border: 1px solid var(--panel-border);
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
 }
 
 .panel-card {
@@ -357,7 +351,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 /* ==========================================
-   8. Preview & Canvas Area
+   8. Preview & Canvas Area (Updated 1080x1350)
    ========================================== */
 .preview-wrapper {
     flex: 1;
@@ -372,11 +366,11 @@ input[type="color"]::-webkit-color-swatch {
 
 #photocard {
     width: 1080px;
-    height: 1080px;
+    height: 1350px;       /* ফিক্সড: 1350px করা হয়েছে */
     min-width: 1080px;
-    min-height: 1080px;
+    min-height: 1350px;   /* ফিক্সড: 1350px করা হয়েছে */
     max-width: 1080px;
-    max-height: 1080px;
+    max-height: 1350px;   /* ফিক্সড: 1350px করা হয়েছে */
     background-color: #2b2b2d;
     position: relative;
     box-sizing: border-box;
@@ -393,7 +387,7 @@ input[type="color"]::-webkit-color-swatch {
    ========================================== */
 .image-container {
     width: 1080px;
-    height: 600px;
+    height: 750px;        /* ফিক্সড: ব্যালেন্স করার জন্য 750px করা হয়েছে */
     background: white;
     position: relative;
     overflow: hidden;
@@ -449,7 +443,7 @@ input[type="color"]::-webkit-color-swatch {
     filter: none !important;
 }
 
-/* Resize Handles - আরও বড় করা হয়েছে */
+/* Resize Handles */
 .resize-handle {
     width: 24px;
     height: 24px;
@@ -466,31 +460,12 @@ input[type="color"]::-webkit-color-swatch {
     display: block !important;
 }
 
-.nw {
-    top: -12px;
-    left: -12px;
-    cursor: nwse-resize;
-}
+.nw { top: -12px; left: -12px; cursor: nwse-resize; }
+.ne { top: -12px; right: -12px; cursor: nesw-resize; }
+.sw { bottom: -12px; left: -12px; cursor: nesw-resize; }
+.se { bottom: -12px; right: -12px; cursor: nwse-resize; }
 
-.ne {
-    top: -12px;
-    right: -12px;
-    cursor: nesw-resize;
-}
-
-.sw {
-    bottom: -12px;
-    left: -12px;
-    cursor: nesw-resize;
-}
-
-.se {
-    bottom: -12px;
-    right: -12px;
-    cursor: nwse-resize;
-}
-
-/* Action Buttons - এডিট ও ডিলিট বাটন বড় করা হয়েছে */
+/* Action Buttons */
 .action-btn {
     position: absolute;
     background: rgba(255, 255, 255, 0.95);
@@ -598,7 +573,7 @@ input[type="color"]::-webkit-color-swatch {
     background-color: #38383a;
     margin: 10px 0px;
     padding: 30px;
-    height: 360px;
+    height: 480px;        /* ফিক্সড: ব্যালেন্স করার জন্য 480px করা হয়েছে */
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -660,12 +635,24 @@ input[type="color"]::-webkit-color-swatch {
 /* ==========================================
    11. Mobile Responsiveness
    ========================================== */
+.mobile-header { display: none; }
+
 @media (max-width: 1050px) {
     body {
         padding: 15px;
         flex-direction: column;
         gap: 20px;
     }
+    
+    /* মোবাইলের হেডিং টপে শো করানো */
+    .mobile-header {
+        display: flex;
+        order: 0;
+        width: 100%;
+        justify-content: center;
+    }
+    .desktop-header { display: none; }
+
     .side-panel {
         width: 100%;
         max-width: 100%;
@@ -678,7 +665,6 @@ input[type="color"]::-webkit-color-swatch {
         order: 3;
     }
 
-    /* ফিক্স: মোবাইলের জন্য ডিসপ্লে ব্লক করা হয়েছে যাতে ক্যানভাস গায়েব না হয় */
     .preview-wrapper {
         display: block;
         order: 1;
