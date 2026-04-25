@@ -596,7 +596,7 @@ input[type="color"]::-webkit-color-swatch {
 .text-block {
     background-color: #38383a;
     margin: 10px 0px;
-    padding: 30px;
+    padding: 120px 105px 120px 105px;
     height: auto;
     flex-grow: 1;
     /* fixed: for balance 480px */
@@ -617,8 +617,6 @@ input[type="color"]::-webkit-color-swatch {
     color: white;
     line-height: 1.1;
     font-weight: 600;
-    padding-left: 75px;
-    padding-right: 75px;
     width: 100%;
     box-sizing: border-box;
 }
@@ -629,8 +627,9 @@ input[type="color"]::-webkit-color-swatch {
     color: #f1f226;
     line-height: 1.1;
     font-weight: 600;
-    padding-left: 70px;
-    padding-right: 70px;
+    padding-left: 75px;
+    padding-right: 75px;
+    padding-bottom: 20px;
     display: none;
     margin-bottom: 10px;
     width: 100%;
