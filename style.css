@@ -645,7 +645,7 @@ input[type="color"]::-webkit-color-swatch {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 15px 40px 27px 40px;
+    padding: 15px 40px 30px 40px;
     color: white;
     font-size: 30px;
     font-family: 'Segoe UI', sans-serif;
