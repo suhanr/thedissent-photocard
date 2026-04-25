@@ -387,7 +387,7 @@ input[type="color"]::-webkit-color-swatch {
    ========================================== */
 .image-container {
     width: 1080px;
-    height: 830px;        /* fixed: 750px for balance elements */
+    height: 800px;        /* fixed: 750px for balance elements */
     background: white;
     position: relative;
     overflow: hidden;
@@ -530,7 +530,7 @@ input[type="color"]::-webkit-color-swatch {
    10. Photocard Inner Elements
    ========================================== */
 .middle-bar {
-    height: 60px;
+    height: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
