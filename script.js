@@ -506,7 +506,7 @@ function downloadPhotocard() {
         photocard.classList.add('exporting');
 
         html2canvas(photocard, {
-            scale: 2,
+            scale: 1,
             width: 1080,
             height: 1350,  // fixed: height will be 1350 px
             windowWidth: 1080,
