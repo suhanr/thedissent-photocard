@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Dissent - Photocard Studio</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -20,6 +20,8 @@
             <label>তারিখ</label>
             <input type="text" id="dateInput" placeholder="এভাবে লিখুনঃ তারিখ: ২০/০৮/২০২৩">
         </div>
+
+
         <div class="panel-card">
             <h3 class="card-header">✍️ হেডিং ও টেক্সট</h3>
             <label>টাইটেল টেক্সট <span style="font-weight:normal; color:#515050; font-size:14px;">(হলুদ করতে লেখার
@@ -35,6 +37,7 @@
         </div>
     </div>
 
+
     <div class="preview-wrapper" id="previewWrapper">
         <div id="photocard" onclick="handleCanvasClick(event)">
             <div class="image-container" id="imageContainer"></div>
@@ -47,16 +50,19 @@
                 <div class="sub-text" id="subTextDisplay"></div>
                 <div class="main-text" id="textDisplay"></div>
             </div>
+
+
             <div class="footer">
                 <span><img crossorigin="anonymous"
-                        src="https://img.icons8.com/?size=100&id=118467&format=png&color=FFFFFF"
-                        style="width:35px">The Dissent</span>
+                        src="https://img.icons8.com/?size=100&id=118467&format=png&color=FFFFFF" style="width:35px">The
+                    Dissent</span>
                 <span><img crossorigin="anonymous"
                         src="https://img.icons8.com/?size=100&id=rhvV5hIsMYPE&format=png&color=FFFFFF"
                         style="width:35px">thedissent.news</span>
             </div>
         </div>
     </div>
+
 
     <div class="side-panel right-panel">
         <div class="panel-card">
@@ -80,6 +86,7 @@
                     <option value="❌">❌ ক্রস</option>
                 </select>
             </div>
+
             <label style="margin-top: 20px;">কাস্টম টেক্সট</label>
             <button type="button" class="btn-primary"
                 style="margin-top: 5px; background: var(--bg-gradient); color: var(--primary-text); border: 1px solid var(--input-border); box-shadow: none;"
@@ -90,6 +97,7 @@
         <button class="btn-accent" onclick="downloadPhotocard()">📥 ফটোকার্ড ডাউনলোড করুন</button>
     </div>
 
+
     <div id="advancedPanel" class="popup-panel">
         <h3 class="card-header drag-handle-popup" id="popupHeader"
             style="color: var(--primary-text); font-size: 20px; justify-content: space-between; margin-bottom: 20px;">
@@ -98,6 +106,7 @@
                 style="font-size: 14px; font-weight: normal; cursor:pointer; color:var(--danger); background:rgba(255,0,0,0.1); padding:4px 10px; border-radius:12px;"
                 onclick="closePopup()">✕ বন্ধ</span>
         </h3>
+
 
         <div id="textControls"
             style="display: none; margin-bottom:15px; border-bottom:1px solid rgba(0,0,0,0.05); padding-bottom:15px;">
@@ -193,6 +202,23 @@
         </div>
     </div>
 
+
+<div id="cropModalOverlay" class="crop-overlay"></div>
+    <div id="cropModal" class="popup-panel" style="max-width: 600px; padding: 20px;">
+        <h3 class="card-header" style="color: var(--primary-text); font-size: 20px; justify-content: space-between; margin-bottom: 15px;">
+            ✂️ ক্রপ ছবি
+            <span style="font-size: 14px; font-weight: normal; cursor:pointer; color:var(--danger); background:rgba(255,0,0,0.1); padding:4px 10px; border-radius:12px;" onclick="closeCropModal()">✕ বাতিল</span>
+        </h3>
+        <div style="max-height: 400px; width: 100%; overflow: hidden; margin-bottom: 15px; background: #e2e8f0; border-radius: 8px;">
+            <img id="cropTargetImage" style="max-width: 100%; display: block;">
+        </div>
+        <button type="button" class="btn-accent" onclick="applyCrop()">✅ এপ্লাই ক্রপ</button>
+    </div>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
     <script src="script.js"></script>
 </body>
 
