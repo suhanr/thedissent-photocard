@@ -11,20 +11,22 @@ const advancedPanel = document.getElementById('advancedPanel');
 let appScale = 0.5;
 
 // ==========================================
-// Auto Scaling Setup (Mobile Fix Applied)
+// Auto Scaling Setup (Updated for 1350 height)
 // ==========================================
 function adjustScale() {
     const wrapperWidth = previewWrapper.clientWidth;
-    if (window.innerWidth <= 1050) { 
-        appScale = wrapperWidth / 1080; 
-        photocard.style.transformOrigin = 'top left'; // মোবাইলের জন্য টপ-লেফট
-    } else { 
-        appScale = Math.min(0.65, wrapperWidth / 1100); 
-        photocard.style.transformOrigin = 'top center'; // ডেস্কটপের জন্য টপ-সেন্টার
+    if (window.innerWidth <= 1050) {
+        appScale = wrapperWidth / 1080;
+        photocard.style.transformOrigin = 'top left';
+        photocard.style.marginLeft = '0px';
+    } else {
+        appScale = Math.min(0.65, wrapperWidth / 1100);
+        photocard.style.transformOrigin = 'top center';
     }
-    
+
     photocard.style.transform = `scale(${appScale})`;
-    previewWrapper.style.height = `${1080 * appScale}px`;
+    // Wrapper height dynamically matches 1350px scaled down
+    previewWrapper.style.height = `${1350 * appScale}px`;
 }
 window.addEventListener('resize', adjustScale);
 setTimeout(adjustScale, 100);
@@ -34,7 +36,7 @@ function updateMainText() {
     let rT = textInput.value;
     let rS = subTextInput.value;
     textDisplay.innerHTML = rT.replace(/\*(.*?)\*/g, '<span class="text-yellow">$1</span>').replace(/\n/g, '<br>');
-    if (rS.trim() === '') { subTextDisplay.style.display = 'none'; } 
+    if (rS.trim() === '') { subTextDisplay.style.display = 'none'; }
     else {
         subTextDisplay.style.display = 'block';
         subTextDisplay.innerHTML = rS.replace(/\*(.*?)\*/g, '<span class="text-yellow">$1</span>').replace(/\n/g, '<br>');
@@ -42,9 +44,9 @@ function updateMainText() {
 }
 textInput.addEventListener('input', updateMainText);
 subTextInput.addEventListener('input', updateMainText);
-document.getElementById('catInput').addEventListener('input', function() { document.getElementById('catDisplay').textContent = this.value; });
-document.getElementById('dateInput').addEventListener('input', function() { document.getElementById('dateDisplay').textContent = this.value; });
-document.getElementById('subTextColor').addEventListener('input', function() { subTextDisplay.style.color = this.value; });
+document.getElementById('catInput').addEventListener('input', function () { document.getElementById('catDisplay').textContent = this.value; });
+document.getElementById('dateInput').addEventListener('input', function () { document.getElementById('dateDisplay').textContent = this.value; });
+document.getElementById('subTextColor').addEventListener('input', function () { subTextDisplay.style.color = this.value; });
 updateMainText();
 
 function rgb2hex(rgb) {
@@ -61,7 +63,7 @@ function createHandles(wrapper, handlesArr) {
         handle.className = `resize-handle ${pos}`;
         wrapper.appendChild(handle);
     });
-    
+
     const editBtn = document.createElement('div');
     editBtn.className = 'action-btn edit-btn';
     editBtn.innerHTML = '✏️';
@@ -81,7 +83,7 @@ function createHandles(wrapper, handlesArr) {
 
 // Layer control function
 function adjustLayer(change) {
-    if(!activeEl) return;
+    if (!activeEl) return;
     let currentZ = parseInt(activeEl.style.zIndex) || parseInt(activeEl.dataset.baseZ) || 20;
     let newZ = currentZ + change;
     activeEl.style.zIndex = newZ;
@@ -96,9 +98,9 @@ imgUpload.addEventListener('change', function (e) {
             wrapper.className = 'draggable-image drag-handle item-element';
             wrapper.style.width = '400px'; wrapper.style.height = '400px';
             wrapper.style.left = '50px'; wrapper.style.top = '50px';
-            wrapper.style.backgroundImage = `url(${event.target.result})`; 
+            wrapper.style.backgroundImage = `url(${event.target.result})`;
             wrapper.dataset.baseZ = 10; wrapper.style.zIndex = 10;
-            
+
             createHandles(wrapper, ['nw', 'ne', 'sw', 'se']);
             imageContainer.appendChild(wrapper);
             setActiveElement(wrapper);
@@ -116,28 +118,28 @@ function addShape(type) {
     wrapper.style.backgroundColor = '#ff4757';
     wrapper.dataset.baseZ = 15; wrapper.style.zIndex = 15;
 
-    if(type === 'square') { wrapper.style.width = '200px'; wrapper.style.height = '200px'; }
-    if(type === 'circle') { wrapper.style.width = '200px'; wrapper.style.height = '200px'; wrapper.style.borderRadius = '50%'; }
-    if(type === 'line') { wrapper.style.width = '300px'; wrapper.style.height = '10px'; wrapper.style.backgroundColor = '#ffffff'; }
+    if (type === 'square') { wrapper.style.width = '200px'; wrapper.style.height = '200px'; }
+    if (type === 'circle') { wrapper.style.width = '200px'; wrapper.style.height = '200px'; wrapper.style.borderRadius = '50%'; }
+    if (type === 'line') { wrapper.style.width = '300px'; wrapper.style.height = '10px'; wrapper.style.backgroundColor = '#ffffff'; }
 
     createHandles(wrapper, ['nw', 'ne', 'sw', 'se']);
     imageContainer.appendChild(wrapper);
     setActiveElement(wrapper);
 }
 
-function addSticker(val) { if(val) createSticker(val, 120); }
+function addSticker(val) { if (val) createSticker(val, 120); }
 function addCustomText() { createCustomText('আপনার টেক্সট', 50); }
 
 function createCustomText(defaultText, defaultSize) {
     const wrapper = document.createElement('div');
     wrapper.className = 'draggable-text drag-handle item-element';
     wrapper.style.left = '50px'; wrapper.style.top = '50px';
-    wrapper.style.color = '#000000'; 
+    wrapper.style.color = '#000000';
     wrapper.style.backgroundColor = 'transparent';
     wrapper.style.fontSize = defaultSize + 'px';
     wrapper.style.width = 'fit-content'; wrapper.style.height = 'auto';
     wrapper.dataset.baseZ = 20; wrapper.style.zIndex = 20;
-    
+
     const content = document.createElement('div');
     content.className = 'text-content';
     content.style.width = '100%'; content.style.height = '100%';
@@ -158,7 +160,7 @@ function createSticker(emoji, defaultSize) {
     wrapper.style.fontSize = defaultSize + 'px';
     wrapper.style.width = 'fit-content'; wrapper.style.height = 'auto';
     wrapper.dataset.baseZ = 20; wrapper.style.zIndex = 20;
-    
+
     const content = document.createElement('div');
     content.className = 'text-content';
     content.innerHTML = emoji;
@@ -179,37 +181,37 @@ function closePopup() {
 }
 
 function clearSelection() {
-    if(activeEl) activeEl.classList.remove('active-element');
+    if (activeEl) activeEl.classList.remove('active-element');
     activeEl = null;
     closePopup();
 }
 
 function handleCanvasClick(e) {
-    if(e.target.id === 'photocard' || e.target.id === 'imageContainer') {
+    if (e.target.id === 'photocard' || e.target.id === 'imageContainer') {
         clearSelection();
     }
 }
 
 function setActiveElement(el) {
-    if(activeEl) activeEl.classList.remove('active-element');
+    if (activeEl) activeEl.classList.remove('active-element');
     activeEl = el;
-    if(!el) return;
+    if (!el) return;
     el.classList.add('active-element');
-    
-    if(advancedPanel.classList.contains('show')) {
+
+    if (advancedPanel.classList.contains('show')) {
         openPopup();
     }
 }
 
 function openPopup() {
-    if(!activeEl) return;
-    
+    if (!activeEl) return;
+
     if (!advancedPanel.style.left || advancedPanel.style.left === '50%') {
         advancedPanel.style.top = '50%';
         advancedPanel.style.left = '50%';
         advancedPanel.style.transform = 'translate(-50%, -50%)';
     }
-    
+
     advancedPanel.classList.add('show');
 
     let currentOpacity = activeEl.style.opacity || 1;
@@ -237,17 +239,17 @@ function openPopup() {
     document.getElementById('colorControlDiv').style.display = (isText || isShape) ? 'block' : 'none';
     document.getElementById('borderControlDiv').style.display = isImage ? 'flex' : 'none';
 
-    if(isText) {
+    if (isText) {
         const content = activeEl.querySelector('.text-content');
-        if(!isSticker) {
+        if (!isSticker) {
             document.getElementById('editActiveText').value = content.innerHTML.replace(/<br>/g, '\n');
             document.getElementById('toggleShadow').checked = content.style.textShadow && content.style.textShadow.includes('rgba');
             document.getElementById('toggleOutline').checked = content.style.webkitTextStroke ? true : false;
         }
-        
+
         document.getElementById('propColor').value = rgb2hex(activeEl.style.color || '#000000');
-        
-        if(activeEl.style.backgroundColor === 'transparent' || !activeEl.style.backgroundColor || activeEl.style.backgroundColor === 'rgba(0, 0, 0, 0)') {
+
+        if (activeEl.style.backgroundColor === 'transparent' || !activeEl.style.backgroundColor || activeEl.style.backgroundColor === 'rgba(0, 0, 0, 0)') {
             document.getElementById('propBgTrans').checked = true;
         } else {
             document.getElementById('propBgTrans').checked = false;
@@ -259,16 +261,16 @@ function openPopup() {
         document.getElementById('propFontSizeVal').innerText = currentSize + 'px';
 
     } else if (isShape) {
-        document.getElementById('propColor').value = '#000000'; 
-        if(activeEl.style.backgroundColor === 'transparent' || !activeEl.style.backgroundColor) {
+        document.getElementById('propColor').value = '#000000';
+        if (activeEl.style.backgroundColor === 'transparent' || !activeEl.style.backgroundColor) {
             document.getElementById('propBgTrans').checked = true;
         } else {
             document.getElementById('propBgTrans').checked = false;
-            document.getElementById('propBg').value = '#ff4757'; 
+            document.getElementById('propBg').value = '#ff4757';
         }
     }
-    
-    if(isImage) {
+
+    if (isImage) {
         let bw = parseInt(activeEl.style.borderWidth) || 0;
         document.getElementById('propBorderWidth').value = bw;
         document.getElementById('propBorderWidthVal').innerText = bw + 'px';
@@ -277,85 +279,85 @@ function openPopup() {
 }
 
 // Live Event Listeners for Properties
-document.getElementById('propOpacity').addEventListener('input', function() {
-    if(activeEl) activeEl.style.opacity = this.value / 100;
+document.getElementById('propOpacity').addEventListener('input', function () {
+    if (activeEl) activeEl.style.opacity = this.value / 100;
     document.getElementById('propOpacityVal').innerText = this.value + '%';
 });
 
-document.getElementById('propRotate').addEventListener('input', function() {
-    if(activeEl) activeEl.style.transform = `rotate(${this.value}deg)`;
+document.getElementById('propRotate').addEventListener('input', function () {
+    if (activeEl) activeEl.style.transform = `rotate(${this.value}deg)`;
     document.getElementById('propRotateVal').innerText = this.value + '°';
 });
 
-document.getElementById('propRadius').addEventListener('input', function() {
-    if(activeEl) activeEl.style.borderRadius = this.value + 'px';
+document.getElementById('propRadius').addEventListener('input', function () {
+    if (activeEl) activeEl.style.borderRadius = this.value + 'px';
     document.getElementById('propRadiusVal').innerText = this.value + 'px';
 });
 
-document.getElementById('propBorderWidth').addEventListener('input', function() {
-    if(activeEl && activeEl.classList.contains('draggable-image')) {
+document.getElementById('propBorderWidth').addEventListener('input', function () {
+    if (activeEl && activeEl.classList.contains('draggable-image')) {
         activeEl.style.borderWidth = this.value + 'px';
         activeEl.style.borderStyle = this.value > 0 ? 'solid' : 'none';
         document.getElementById('propBorderWidthVal').innerText = this.value + 'px';
     }
 });
 
-document.getElementById('propBorderColor').addEventListener('input', function() {
-    if(activeEl && activeEl.classList.contains('draggable-image')) {
+document.getElementById('propBorderColor').addEventListener('input', function () {
+    if (activeEl && activeEl.classList.contains('draggable-image')) {
         activeEl.style.borderColor = this.value;
     }
 });
 
-document.getElementById('propColor').addEventListener('input', function() {
-    if(activeEl && (activeEl.classList.contains('draggable-text') || activeEl.classList.contains('draggable-shape'))) { 
-        if(activeEl.classList.contains('draggable-text')) activeEl.style.color = this.value;
-        if(activeEl.classList.contains('draggable-shape')) activeEl.style.backgroundColor = this.value; 
+document.getElementById('propColor').addEventListener('input', function () {
+    if (activeEl && (activeEl.classList.contains('draggable-text') || activeEl.classList.contains('draggable-shape'))) {
+        if (activeEl.classList.contains('draggable-text')) activeEl.style.color = this.value;
+        if (activeEl.classList.contains('draggable-shape')) activeEl.style.backgroundColor = this.value;
     }
 });
 
-document.getElementById('propBg').addEventListener('input', function() {
-    if(!activeEl || document.getElementById('propBgTrans').checked || activeEl.classList.contains('draggable-shape')) return;
+document.getElementById('propBg').addEventListener('input', function () {
+    if (!activeEl || document.getElementById('propBgTrans').checked || activeEl.classList.contains('draggable-shape')) return;
     activeEl.style.backgroundColor = this.value;
 });
 
-document.getElementById('propBgTrans').addEventListener('change', function() {
-    if(activeEl && !activeEl.classList.contains('draggable-shape')) {
+document.getElementById('propBgTrans').addEventListener('change', function () {
+    if (activeEl && !activeEl.classList.contains('draggable-shape')) {
         activeEl.style.backgroundColor = this.checked ? 'transparent' : document.getElementById('propBg').value;
     }
 });
 
-document.getElementById('propFontSize').addEventListener('input', function() {
-    if(activeEl && activeEl.classList.contains('draggable-text')) {
+document.getElementById('propFontSize').addEventListener('input', function () {
+    if (activeEl && activeEl.classList.contains('draggable-text')) {
         activeEl.style.fontSize = this.value + 'px';
         activeEl.style.height = 'auto';
         document.getElementById('propFontSizeVal').innerText = this.value + 'px';
     }
 });
 
-document.getElementById('editActiveText').addEventListener('input', function() {
-    if(activeEl && activeEl.classList.contains('draggable-text') && !activeEl.classList.contains('is-sticker')) {
+document.getElementById('editActiveText').addEventListener('input', function () {
+    if (activeEl && activeEl.classList.contains('draggable-text') && !activeEl.classList.contains('is-sticker')) {
         activeEl.querySelector('.text-content').innerHTML = this.value.replace(/\n/g, '<br>');
     }
 });
 
 function formatActiveText(type) {
-    if(!activeEl || activeEl.classList.contains('is-sticker')) return;
+    if (!activeEl || activeEl.classList.contains('is-sticker')) return;
     const content = activeEl.querySelector('.text-content');
-    if(type === 'bold') content.style.fontWeight = content.style.fontWeight === 'bold' ? 'normal' : 'bold';
-    if(type === 'italic') content.style.fontStyle = content.style.fontStyle === 'italic' ? 'normal' : 'italic';
-    if(['left', 'center', 'right'].includes(type)) content.style.textAlign = type;
+    if (type === 'bold') content.style.fontWeight = content.style.fontWeight === 'bold' ? 'normal' : 'bold';
+    if (type === 'italic') content.style.fontStyle = content.style.fontStyle === 'italic' ? 'normal' : 'italic';
+    if (['left', 'center', 'right'].includes(type)) content.style.textAlign = type;
 }
 
 function applyTextEffects() {
-    if(!activeEl || activeEl.classList.contains('is-sticker')) return;
+    if (!activeEl || activeEl.classList.contains('is-sticker')) return;
     const content = activeEl.querySelector('.text-content');
     const shadowOn = document.getElementById('toggleShadow').checked;
     const outlineOn = document.getElementById('toggleOutline').checked;
 
     let shadowString = '';
-    if(shadowOn) shadowString += '4px 4px 8px rgba(0,0,0,0.7)';
-    if(outlineOn) {
-        if(shadowString) shadowString += ', ';
+    if (shadowOn) shadowString += '4px 4px 8px rgba(0,0,0,0.7)';
+    if (outlineOn) {
+        if (shadowString) shadowString += ', ';
         shadowString += '-2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000';
     }
     content.style.textShadow = shadowString || 'none';
@@ -377,14 +379,14 @@ function getEventPos(e) {
 function handleStart(e) {
     // Popup Drag
     if (e.target.closest('.drag-handle-popup')) {
-        if(e.target.tagName.toLowerCase() === 'span') return; 
+        if (e.target.tagName.toLowerCase() === 'span') return;
         isDraggingPopup = true;
         const pos = getEventPos(e);
         popupStartX = pos.x; popupStartY = pos.y;
-        
+
         const rect = advancedPanel.getBoundingClientRect();
         popupInitLeft = rect.left; popupInitTop = rect.top;
-        
+
         advancedPanel.style.transform = 'none';
         advancedPanel.style.left = popupInitLeft + 'px';
         advancedPanel.style.top = popupInitTop + 'px';
@@ -398,26 +400,26 @@ function handleStart(e) {
         isResizing = true;
         currentHandle = e.target;
         currentElement = e.target.closest('.item-element');
-        
+
         const pos = getEventPos(e);
         startX = pos.x; startY = pos.y;
         initialLeft = currentElement.offsetLeft; initialTop = currentElement.offsetTop;
         startW = currentElement.offsetWidth; startH = currentElement.offsetHeight;
 
-        if(currentElement.classList.contains('draggable-text')){
+        if (currentElement.classList.contains('draggable-text')) {
             startFontSize = parseFloat(window.getComputedStyle(currentElement).fontSize) || 40;
         }
         setActiveElement(currentElement);
         e.preventDefault(); e.stopPropagation();
-    } 
+    }
     else if (e.target.classList.contains('drag-handle') || e.target.closest('.item-element')) {
         isDragging = true;
         currentElement = e.target.closest('.item-element');
-        
+
         const pos = getEventPos(e);
         startX = pos.x; startY = pos.y;
         initialLeft = currentElement.offsetLeft; initialTop = currentElement.offsetTop;
-        
+
         setActiveElement(currentElement);
         e.preventDefault();
     }
@@ -431,7 +433,7 @@ function handleMove(e) {
         const dy = pos.y - popupStartY;
         advancedPanel.style.left = (popupInitLeft + dx) + 'px';
         advancedPanel.style.top = (popupInitTop + dy) + 'px';
-    } 
+    }
     else if (isResizing && currentElement) {
         e.preventDefault();
         const pos = getEventPos(e);
@@ -440,32 +442,32 @@ function handleMove(e) {
 
         let newW = startW, newH = startH, newL = initialLeft, newT = initialTop;
 
-        if (currentHandle.classList.contains('se')) { newW = startW + dx; newH = startH + dy; } 
-        else if (currentHandle.classList.contains('sw')) { newW = startW - dx; newH = startH + dy; newL = initialLeft + dx; } 
-        else if (currentHandle.classList.contains('ne')) { newW = startW + dx; newH = startH - dy; newT = initialTop + dy; } 
+        if (currentHandle.classList.contains('se')) { newW = startW + dx; newH = startH + dy; }
+        else if (currentHandle.classList.contains('sw')) { newW = startW - dx; newH = startH + dy; newL = initialLeft + dx; }
+        else if (currentHandle.classList.contains('ne')) { newW = startW + dx; newH = startH - dy; newT = initialTop + dy; }
         else if (currentHandle.classList.contains('nw')) { newW = startW - dx; newH = startH - dy; newL = initialLeft + dx; newT = initialTop + dy; }
 
         if (newW > 20) {
             currentElement.style.width = newW + 'px';
             currentElement.style.left = newL + 'px';
         }
-        
+
         if (currentElement.classList.contains('draggable-text') && newW > 20) {
             let scaleRatio = newW / startW;
             let newFontSize = startFontSize * scaleRatio;
-            if(newFontSize > 10) { 
+            if (newFontSize > 10) {
                 currentElement.style.fontSize = newFontSize + 'px';
-                if(activeEl === currentElement) {
+                if (activeEl === currentElement) {
                     document.getElementById('propFontSize').value = Math.round(newFontSize);
                     document.getElementById('propFontSizeVal').innerText = Math.round(newFontSize) + 'px';
                 }
             }
-            currentElement.style.height = 'auto'; 
+            currentElement.style.height = 'auto';
         } else if (newH > 20) {
             currentElement.style.height = newH + 'px';
             currentElement.style.top = newT + 'px';
         }
-    } 
+    }
     else if (isDragging && currentElement) {
         e.preventDefault();
         const pos = getEventPos(e);
@@ -486,14 +488,13 @@ document.addEventListener('touchmove', handleMove, { passive: false });
 document.addEventListener('touchend', handleEnd);
 
 // ==========================================
-// Download Engine & Fixes for Mobile
+// Download Engine & Fixes for Mobile (Updated for 1350)
 // ==========================================
 function downloadPhotocard() {
-    clearSelection(); 
-    
-    // html2canvas clipping/shifting fix for mobile
-    window.scrollTo(0, 0); 
-    document.body.scrollTop = 0; 
+    clearSelection();
+
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 
     document.fonts.ready.then(() => {
@@ -506,10 +507,10 @@ function downloadPhotocard() {
 
         html2canvas(photocard, {
             scale: 2,
-            width: 1080,   
-            height: 1080,
+            width: 1080,
+            height: 1350,  // fixed: height will be 1350 px
             windowWidth: 1080,
-            windowHeight: 1080,
+            windowHeight: 1350, // fixed: height will be 1350px
             useCORS: true,
             allowTaint: true,
             backgroundColor: '#2b2b2d',
