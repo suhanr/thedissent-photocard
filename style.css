@@ -596,7 +596,7 @@ input[type="color"]::-webkit-color-swatch {
 .text-block {
     background-color: #38383a;
     margin: 10px 0px;
-    padding: 120px 105px 120px 105px;
+    padding: 100px 105px 100px 105px;
     height: auto;
     flex-grow: 1;
     /* fixed: for balance 480px */
@@ -629,7 +629,6 @@ input[type="color"]::-webkit-color-swatch {
     font-weight: 600;
     padding-left: 75px;
     padding-right: 75px;
-    padding-bottom: 20px;
     display: none;
     margin-bottom: 10px;
     width: 100%;
