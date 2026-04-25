@@ -538,10 +538,13 @@ input[type="color"]::-webkit-color-swatch {
     transform: scale(1.1);
 }
 
-#photocard.exporting .draggable-image,
 #photocard.exporting .draggable-shape,
 #photocard.exporting .draggable-text {
     border: none !important;
+    box-shadow: none !important;
+}
+
+#photocard.exporting .draggable-image {
     box-shadow: none !important;
 }
 
@@ -642,7 +645,7 @@ input[type="color"]::-webkit-color-swatch {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 15px 40px 25px 40px;
+    padding: 15px 40px 27px 40px;
     color: white;
     font-size: 30px;
     font-family: 'Segoe UI', sans-serif;
