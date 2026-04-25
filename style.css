@@ -538,6 +538,19 @@ input[type="color"]::-webkit-color-swatch {
     transform: scale(1.1);
 }
 
+.crop-btn { 
+    top: -20px; 
+    right: 80px; /* for edit and delete beside placement */
+    font-size: 14px; 
+}
+.crop-btn:hover { 
+    background: #ff9f0a; 
+    color: white; 
+    transform: scale(1.1); 
+}
+
+
+
 #photocard.exporting .draggable-shape,
 #photocard.exporting .draggable-text {
     border: none !important;
@@ -656,6 +669,29 @@ input[type="color"]::-webkit-color-swatch {
     align-items: center;
     gap: 8px;
 }
+
+
+
+/* ==========================================
+   12. Crop Modal Overlay & Styles
+   ========================================== */
+.crop-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1050;
+    display: none;
+}
+#cropModal {
+    z-index: 1100;
+}
+/* for responsive crop*/
+.cropper-container {
+    width: 100% !important;
+}
+
 
 /* ==========================================
    11. Mobile Responsiveness
