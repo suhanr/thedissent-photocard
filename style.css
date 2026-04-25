@@ -589,7 +589,7 @@ input[type="color"]::-webkit-color-swatch {
 
 .main-text {
     font-family: 'Shurjo', serif;
-    font-size: 70px;
+    font-size: 75px;
     color: white;
     line-height: 1.1;
     font-weight: 600;
@@ -601,7 +601,7 @@ input[type="color"]::-webkit-color-swatch {
 
 .sub-text {
     font-family: 'Shurjo', serif;
-    font-size: 46px;
+    font-size: 50px;
     color: #f1f226;
     line-height: 1.1;
     font-weight: 600;
