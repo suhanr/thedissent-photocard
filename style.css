@@ -62,12 +62,18 @@ body {
 .header-title {
     font-size: 30px;
     font-weight: bold;
+    font-family: 'Helvetica';
     letter-spacing: -0.5px;
     margin-top: 0;
     margin-bottom: 5px;
     display: flex;
     align-items: center;
     gap: 10px;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
 }
 
 .panel-card {
@@ -367,13 +373,10 @@ input[type="color"]::-webkit-color-swatch {
 #photocard {
     width: 1080px;
     height: 1350px;
-    /* fixed: 1350px done*/
     min-width: 1080px;
     min-height: 1350px;
-    /* fixed: 1350px done */
     max-width: 1080px;
     max-height: 1350px;
-    /* fixed: 1350px done */
     background-color: #2b2b2d;
     position: relative;
     box-sizing: border-box;
@@ -391,7 +394,6 @@ input[type="color"]::-webkit-color-swatch {
 .image-container {
     width: 1080px;
     height: 780px;
-    /* fixed: 780px for balance elements */
     background: white;
     position: relative;
     overflow: hidden;
@@ -540,7 +542,7 @@ input[type="color"]::-webkit-color-swatch {
 
 .crop-btn { 
     top: -20px; 
-    right: 80px; /* for edit and delete beside placement */
+    right: 80px; 
     font-size: 14px; 
 }
 .crop-btn:hover { 
@@ -548,8 +550,6 @@ input[type="color"]::-webkit-color-swatch {
     color: white; 
     transform: scale(1.1); 
 }
-
-
 
 #photocard.exporting .draggable-shape,
 #photocard.exporting .draggable-text {
@@ -615,7 +615,6 @@ input[type="color"]::-webkit-color-swatch {
     padding: 50px 105px 30px 105px;
     height: auto;
     flex-grow: 1;
-    /* fixed: for balance 480px */
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -670,8 +669,6 @@ input[type="color"]::-webkit-color-swatch {
     gap: 8px;
 }
 
-
-
 /* ==========================================
    12. Crop Modal Overlay & Styles
    ========================================== */
@@ -687,10 +684,46 @@ input[type="color"]::-webkit-color-swatch {
 #cropModal {
     z-index: 1100;
 }
-/* for responsive crop*/
 .cropper-container {
     width: 100% !important;
 }
+
+
+/*Date input design */
+
+
+input[type="date"] {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+
+input[type="date"] {
+    padding: 12px 16px;
+    font-size: 18px;
+    color: #555;
+
+    background: #f2f2f2;
+    border: 4px solid #c6d9ee;
+    border-radius: 18px;
+
+    outline: none;
+    transition: 0.2s;
+}
+
+/* focus করলে ওই blue glow */
+input[type="date"]:focus {
+    border-color: #9fc2e8;
+    box-shadow: 0 0 0 4px rgba(159, 194, 232, 0.4);
+}
+
+/* calendar icon একটু subtle */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
 
 
 /* ==========================================
@@ -707,7 +740,6 @@ input[type="color"]::-webkit-color-swatch {
         gap: 20px;
     }
 
-    /* mobile heading show for top */
     .mobile-header {
         display: flex;
         order: 0;
@@ -749,29 +781,14 @@ input[type="color"]::-webkit-color-swatch {
         width: 90%;
     }
 
-    .main-text {
-        font-family: 'Shurjo', serif;
-        font-size: 75px;
-        color: white;
-        line-height: 1.1;
-        font-weight: 600;
-        padding-left: 75px;
-        padding-right: 75px;
-        width: 100%;
-        box-sizing: border-box;
+    /* মোবাইলের জন্য আইকনগুলোর সাইজ বড় করা হলো */
+    .action-btn {
+        width: 50px !important;
+        height: 50px !important;
+        line-height: 48px !important;
+        font-size: 22px !important;
     }
-
-    .sub-text {
-        font-family: 'Shurjo', serif;
-        font-size: 50px;
-        color: #f1f226;
-        line-height: 1.1;
-        font-weight: 600;
-        padding-left: 70px;
-        padding-right: 70px;
-        display: none;
-        margin-bottom: 10px;
-        width: 100%;
-        box-sizing: border-box;
-    }
+    .delete-btn { top: -25px !important; right: -25px !important; }
+    .edit-btn { top: -25px !important; right: 35px !important; }
+    .crop-btn { top: -25px !important; right: 95px !important; }
 }
