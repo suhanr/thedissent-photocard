@@ -17,10 +17,9 @@
             <h3 class="card-header">📝 বেসিক তথ্য</h3>
             <label>ক্যাটেগরি</label>
             <input type="text" id="catInput" placeholder="যেমন: ডিজিটাল ইনভেস্টিগেশন">
-            <label>তারিখ</label>
-            <input type="text" id="dateInput" placeholder="এভাবে লিখুনঃ তারিখ: ২০/০৮/২০২৩">
+            <label>তারিখ নির্বাচন করুন</label>
+            <input type="date" id="dateInput" style="font-family: inherit;">
         </div>
-
 
         <div class="panel-card">
             <h3 class="card-header">✍️ হেডিং ও টেক্সট</h3>
@@ -44,13 +43,12 @@
             <div class="middle-bar">
                 <div class="category" id="catDisplay">ডিজিটাল ইনভেস্টিগেশন</div>
                 <div class="logo-area"><img src="logo.png"></div>
-                <div class="date" id="dateDisplay">তারিখ: ২০/০৪/২০২৬</div>
+                <div class="date" id="dateDisplay">তারিখ: </div>
             </div>
             <div class="text-block">
                 <div class="sub-text" id="subTextDisplay"></div>
                 <div class="main-text" id="textDisplay"></div>
             </div>
-
 
             <div class="footer">
                 <span><img crossorigin="anonymous"
@@ -151,6 +149,7 @@
             <div style="width: 100%;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <label style="margin:0;">ছবির বর্ডার</label>
+                    <label style="margin:0;padding-left:160px;">বর্ডার কালার</label>
                     <input type="color" id="propBorderColor" value="#ffffff"
                         style="width: 30px; height: 30px; padding: 0; border: none;">
                 </div>
@@ -203,20 +202,21 @@
     </div>
 
 
-<div id="cropModalOverlay" class="crop-overlay"></div>
+    <div id="cropModalOverlay" class="crop-overlay"></div>
     <div id="cropModal" class="popup-panel" style="max-width: 600px; padding: 20px;">
-        <h3 class="card-header" style="color: var(--primary-text); font-size: 20px; justify-content: space-between; margin-bottom: 15px;">
+        <h3 class="card-header"
+            style="color: var(--primary-text); font-size: 20px; justify-content: space-between; margin-bottom: 15px;">
             ✂️ ক্রপ ছবি
-            <span style="font-size: 14px; font-weight: normal; cursor:pointer; color:var(--danger); background:rgba(255,0,0,0.1); padding:4px 10px; border-radius:12px;" onclick="closeCropModal()">✕ বাতিল</span>
+            <span
+                style="font-size: 14px; font-weight: normal; cursor:pointer; color:var(--danger); background:rgba(255,0,0,0.1); padding:4px 10px; border-radius:12px;"
+                onclick="closeCropModal()">✕ বাতিল</span>
         </h3>
-        <div style="max-height: 400px; width: 100%; overflow: hidden; margin-bottom: 15px; background: #e2e8f0; border-radius: 8px;">
+        <div
+            style="max-height: 400px; width: 100%; overflow: hidden; margin-bottom: 15px; background: #e2e8f0; border-radius: 8px;">
             <img id="cropTargetImage" style="max-width: 100%; display: block;">
         </div>
         <button type="button" class="btn-accent" onclick="applyCrop()">✅ এপ্লাই ক্রপ</button>
     </div>
-
-
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
     <script src="script.js"></script>
