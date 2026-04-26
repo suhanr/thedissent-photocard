@@ -10,9 +10,6 @@ const advancedPanel = document.getElementById('advancedPanel');
 
 let appScale = 0.5;
 
-// ==========================================
-// Auto Scaling Setup (Updated for 1350 height)
-// ==========================================
 function adjustScale() {
     const wrapperWidth = previewWrapper.clientWidth;
     if (window.innerWidth <= 1050) {
@@ -25,13 +22,11 @@ function adjustScale() {
     }
 
     photocard.style.transform = `scale(${appScale})`;
-    // Wrapper height dynamically matches 1350px scaled down
     previewWrapper.style.height = `${1350 * appScale}px`;
 }
 window.addEventListener('resize', adjustScale);
 setTimeout(adjustScale, 100);
 
-// Basic Info Live Update
 function updateMainText() {
     let rT = textInput.value;
     let rS = subTextInput.value;
@@ -45,8 +40,18 @@ function updateMainText() {
 textInput.addEventListener('input', updateMainText);
 subTextInput.addEventListener('input', updateMainText);
 document.getElementById('catInput').addEventListener('input', function () { document.getElementById('catDisplay').textContent = this.value; });
-document.getElementById('dateInput').addEventListener('input', function () { document.getElementById('dateDisplay').textContent = this.value; });
-document.getElementById('subTextColor').addEventListener('input', function () { subTextDisplay.style.color = this.value; });
+
+document.getElementById('dateInput').addEventListener('input', function () {
+    if (this.value) {
+        const parts = this.value.split('-');
+        const formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`; 
+        const engToBng = { '0': '০', '1': '১', '2': '২', '3': '৩', '4': '৪', '5': '৫', '6': '৬', '7': '৭', '8': '৮', '9': '৯' };
+        const bnDate = formattedDate.replace(/[0-9]/g, m => engToBng[m]);
+        document.getElementById('dateDisplay').textContent = `তারিখ: ${bnDate}`;
+    } else {
+        document.getElementById('dateDisplay').textContent = `তারিখ: `;
+    }
+});
 updateMainText();
 
 function rgb2hex(rgb) {
@@ -56,7 +61,6 @@ function rgb2hex(rgb) {
     return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
 }
 
-// Add action buttons and handles (Updated with Crop Button)
 function createHandles(wrapper, handlesArr) {
     handlesArr.forEach(pos => {
         const handle = document.createElement('div');
@@ -72,7 +76,6 @@ function createHandles(wrapper, handlesArr) {
     editBtn.ontouchstart = (e) => { e.preventDefault(); e.stopPropagation(); setActiveElement(wrapper); openPopup(); }
     wrapper.appendChild(editBtn);
 
-    // new crop button for image
     if (wrapper.classList.contains('draggable-image')) {
         const cropBtn = document.createElement('div');
         cropBtn.className = 'action-btn crop-btn';
@@ -108,7 +111,6 @@ function createHandles(wrapper, handlesArr) {
     wrapper.appendChild(delBtn);
 }
 
-// Layer control function
 function adjustLayer(change) {
     if (!activeEl) return;
     let currentZ = parseInt(activeEl.style.zIndex) || parseInt(activeEl.dataset.baseZ) || 20;
@@ -116,18 +118,14 @@ function adjustLayer(change) {
     activeEl.style.zIndex = newZ;
 }
 
-// ==========================================
-// croper logic and image uploader(Advanced)
-// ==========================================
 let cropper = null;
-let croppingElement = null; // for crop element tracking
-let currentOriginalImage = null; // for keep original pic
+let croppingElement = null; 
+let currentOriginalImage = null; 
 
 const cropModal = document.getElementById('cropModal');
 const cropOverlay = document.getElementById('cropModalOverlay');
 const cropTargetImage = document.getElementById('cropTargetImage');
 
-// Add Image (Cropper Modal Logic)
 imgUpload.addEventListener('change', function (e) {
     if (e.target.files && e.target.files.length > 0) {
         const file = e.target.files[0];
@@ -135,9 +133,8 @@ imgUpload.addEventListener('change', function (e) {
 
         reader.onload = function (event) {
             currentOriginalImage = event.target.result;
-            croppingElement = null; //new image uploading
+            croppingElement = null;
 
-            // show pop-up
             cropOverlay.style.display = 'block';
             cropModal.classList.add('show');
             cropModal.style.top = '50%';
@@ -146,7 +143,6 @@ imgUpload.addEventListener('change', function (e) {
 
             cropTargetImage.src = currentOriginalImage;
 
-            // cropper start
             if (cropper) {
                 cropper.destroy();
             }
@@ -159,7 +155,7 @@ imgUpload.addEventListener('change', function (e) {
         }
         reader.readAsDataURL(file);
     }
-    this.value = ''; // Reset input
+    this.value = ''; 
 });
 
 function closeCropModal() {
@@ -174,7 +170,6 @@ function closeCropModal() {
 function applyCrop() {
     if (!cropper) return;
 
-    // crop canvas
     const canvas = cropper.getCroppedCanvas({
         imageSmoothingEnabled: true,
         imageSmoothingQuality: 'high',
@@ -182,15 +177,12 @@ function applyCrop() {
     const croppedDataUrl = canvas.toDataURL('image/png');
 
     if (croppingElement) {
-        // for crop again(multiple)
         croppingElement.style.backgroundImage = `url(${croppedDataUrl})`;
         croppingElement = null;
     } else {
-        // for new image
         const wrapper = document.createElement('div');
         wrapper.className = 'draggable-image drag-handle item-element';
 
-        // ratio size
         const defaultWidth = 400;
         const defaultHeight = (canvas.height / canvas.width) * defaultWidth;
 
@@ -199,7 +191,7 @@ function applyCrop() {
         wrapper.style.left = '50px';
         wrapper.style.top = '50px';
         wrapper.style.backgroundImage = `url(${croppedDataUrl})`;
-        wrapper.dataset.originalImage = currentOriginalImage; // for saving original pic
+        wrapper.dataset.originalImage = currentOriginalImage; 
         wrapper.dataset.baseZ = 10; wrapper.style.zIndex = 10;
 
         createHandles(wrapper, ['nw', 'ne', 'sw', 'se']);
@@ -210,7 +202,6 @@ function applyCrop() {
     closeCropModal();
 }
 
-// Add Shape
 function addShape(type) {
     const wrapper = document.createElement('div');
     wrapper.className = 'draggable-shape drag-handle item-element';
@@ -271,9 +262,6 @@ function createSticker(emoji, defaultSize) {
     setActiveElement(wrapper);
 }
 
-// ==========================================
-// Popup & Editing Logic
-// ==========================================
 let activeEl = null;
 
 function closePopup() {
@@ -378,7 +366,6 @@ function openPopup() {
     }
 }
 
-// Live Event Listeners for Properties
 document.getElementById('propOpacity').addEventListener('input', function () {
     if (activeEl) activeEl.style.opacity = this.value / 100;
     document.getElementById('propOpacityVal').innerText = this.value + '%';
@@ -463,9 +450,6 @@ function applyTextEffects() {
     content.style.textShadow = shadowString || 'none';
 }
 
-// ==========================================
-// Interaction Logic (Drag, Resize, Popup Drag)
-// ==========================================
 let isDragging = false, isResizing = false, isDraggingPopup = false;
 let currentElement = null, currentHandle = null;
 let startX, startY, initialLeft, initialTop, startW, startH, startFontSize = 40;
@@ -477,7 +461,6 @@ function getEventPos(e) {
 }
 
 function handleStart(e) {
-    // Popup Drag
     if (e.target.closest('.drag-handle-popup')) {
         if (e.target.tagName.toLowerCase() === 'span') return;
         isDraggingPopup = true;
@@ -547,25 +530,34 @@ function handleMove(e) {
         else if (currentHandle.classList.contains('ne')) { newW = startW + dx; newH = startH - dy; newT = initialTop + dy; }
         else if (currentHandle.classList.contains('nw')) { newW = startW - dx; newH = startH - dy; newL = initialLeft + dx; newT = initialTop + dy; }
 
-        if (newW > 20) {
-            currentElement.style.width = newW + 'px';
-            currentElement.style.left = newL + 'px';
+        // ছবির রেশিও ফিক্সড রাখার জন্য নতুন লজিক
+        if (currentElement.classList.contains('draggable-image')) {
+            let ratio = startW / startH;
+            newH = newW / ratio; 
+            if (currentHandle.classList.contains('ne') || currentHandle.classList.contains('nw')) {
+                newT = initialTop + (startH - newH);
+            }
         }
 
-        if (currentElement.classList.contains('draggable-text') && newW > 20) {
-            let scaleRatio = newW / startW;
-            let newFontSize = startFontSize * scaleRatio;
-            if (newFontSize > 10) {
-                currentElement.style.fontSize = newFontSize + 'px';
-                if (activeEl === currentElement) {
-                    document.getElementById('propFontSize').value = Math.round(newFontSize);
-                    document.getElementById('propFontSizeVal').innerText = Math.round(newFontSize) + 'px';
+        if (newW > 20 && newH > 20) {
+            currentElement.style.width = newW + 'px';
+            currentElement.style.left = newL + 'px';
+
+            if (currentElement.classList.contains('draggable-text')) {
+                let scaleRatio = newW / startW;
+                let newFontSize = startFontSize * scaleRatio;
+                if (newFontSize > 10) {
+                    currentElement.style.fontSize = newFontSize + 'px';
+                    if (activeEl === currentElement) {
+                        document.getElementById('propFontSize').value = Math.round(newFontSize);
+                        document.getElementById('propFontSizeVal').innerText = Math.round(newFontSize) + 'px';
+                    }
                 }
+                currentElement.style.height = 'auto';
+            } else {
+                currentElement.style.height = newH + 'px';
+                currentElement.style.top = newT + 'px';
             }
-            currentElement.style.height = 'auto';
-        } else if (newH > 20) {
-            currentElement.style.height = newH + 'px';
-            currentElement.style.top = newT + 'px';
         }
     }
     else if (isDragging && currentElement) {
@@ -587,9 +579,6 @@ document.addEventListener('touchstart', handleStart, { passive: false });
 document.addEventListener('touchmove', handleMove, { passive: false });
 document.addEventListener('touchend', handleEnd);
 
-// ==========================================
-// Download Engine & Fixes for Mobile (Updated for 1350 & scale 1)
-// ==========================================
 function downloadPhotocard() {
     clearSelection();
 
@@ -606,7 +595,7 @@ function downloadPhotocard() {
         photocard.classList.add('exporting');
 
         html2canvas(photocard, {
-            scale: 2,
+            scale: 1, 
             width: 1080,
             height: 1350,
             windowWidth: 1080,
